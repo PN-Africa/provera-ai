@@ -35,11 +35,11 @@ export function PublicHeader() {
           aria-label="Main navigation"
           className="ml-auto hidden items-center gap-[70px] lg:flex"
         >
-          <Link href="/#features" className={navLinkClass}>
+          <Link href="/features" className={navLinkClass}>
             Features
           </Link>
 
-          <Link href="/#how-it-works" className={navLinkClass}>
+          <Link href="/how-it-works" className={navLinkClass}>
             How it works
           </Link>
 
