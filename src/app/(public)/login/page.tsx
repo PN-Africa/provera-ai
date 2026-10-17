@@ -58,12 +58,24 @@ export default function LoginPage() {
                 />
               </div>
 
-              <button
+              {/* <button
                 type="submit"
                 className="h-12 w-full font-sans rounded-lg bg-[#455EFF] text-[#EDEFFF] transition hover:bg-[#455EFF] font-sans text-[14px] font-medium  leading-[20px] tracking-[0px]"
               >
                 Sign in
-              </button>
+              </button> */}
+              {/* <Link
+                href="/workspace/overview"
+                className="h-12 w-full font-sans rounded-lg bg-[#455EFF] text-[#EDEFFF] transition hover:bg-[#455EFF] font-sans text-[14px] font-medium  leading-[20px] tracking-[0px]"
+              >
+                Sign in
+              </Link> */}
+              <Link
+                href="/workspace/overview"
+                className="flex h-12 w-full items-center justify-center rounded-lg bg-[#455EFF] font-sans text-[14px] font-medium leading-[20px] tracking-[0px] text-[#EDEFFF] transition hover:bg-[#455EFF]"
+              >
+                Sign in
+              </Link>
             </form>
 
             <Link
