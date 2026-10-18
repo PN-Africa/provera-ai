@@ -68,7 +68,7 @@ export default function FeaturesPage() {
             Provera AI Features
           </p>
 
-          <h1 className="mt-7 max-w-[900px] font-manrope text-[40px] font-bold leading-[1.08] tracking-[-0.8px] text-[#EDEFFF] sm:text-[48px] md:text-[56px] lg:text-[64px] lg:tracking-[-1.2px]">
+          <h1 className="mt-7 max-w-[760px] font-manrope text-[30px] font-bold leading-[56px] tracking-[-0.5px] text-[#EDEFFF] sm:text-[42px] md:text-[48px]">
             A clearer way to
             <br className="hidden sm:block" /> review transactions.
           </h1>
@@ -79,8 +79,8 @@ export default function FeaturesPage() {
           </p>
 
           <Link
-            href="/register"
-            className="mt-6 inline-flex min-h-[48px] w-full max-w-[224px] items-center justify-center rounded-[6px] bg-[#455EFF] px-6 font-sans text-[14px] font-medium leading-[20px] text-white transition-colors hover:bg-[#354CEB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5968FF] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+            href="/signup"
+            className="mt-6 inline-flex min-h-[48px] w-full max-w-[224px] items-center justify-center rounded-[6px] bg-[#455EFF] px-6 font-sans text-[14px] font-medium leading-[20px] text-[#EDEFFF]transition-colors hover:bg-[#354CEB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5968FF] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
           >
             Get started
           </Link>
@@ -92,14 +92,14 @@ export default function FeaturesPage() {
             Everything you need for a focused review.
           </h2>
 
-          <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:px-[90px]  px-5">
             {features.map((feature) => {
               const Icon = feature.icon;
 
               return (
                 <article
                   key={feature.category}
-                  className="flex min-h-[192px] items-center gap-5 rounded-[10px] border border-[#202236] bg-[#1C1D27] p-5 sm:gap-6 sm:p-8"
+                  className="flex min-h-[192px] items-center gap-5 rounded-[10px] border border-[#202236] bg-[#1C1D27] p-5 sm:gap-6 sm:p-8 "
                 >
                   <div className="flex size-12 shrink-0 items-center justify-center rounded-[8px] bg-[#252D50] text-[#E1E5FF]">
                     <Icon size={22} strokeWidth={1.7} aria-hidden="true" />
@@ -127,7 +127,7 @@ export default function FeaturesPage() {
 
       {/* Bottom call to action */}
       <section className="mt-8 bg-[#17182B]">
-        <div className="mx-auto flex w-full max-w-[1400px] flex-col gap-6 px-5 py-10 sm:px-8 sm:py-12 lg:flex-row lg:items-center lg:justify-between lg:px-[56px] lg:py-[42px]">
+        <div className="mx-auto flex w-full max-w-[1400px] flex-col gap-6 px-5 py-10 sm:px-8 sm:py-12 md:px-[50px] lg:flex-row lg:items-center lg:justify-between lg:px-[160px] lg:py-[42px]">
           <div>
             <h2 className="font-manrope text-[24px] font-semibold leading-[32px] tracking-[-0.3px] text-[#EDEFFF] sm:text-[28px] sm:leading-[36px]">
               Start your next review with clarity.
@@ -139,7 +139,7 @@ export default function FeaturesPage() {
           </div>
 
           <Link
-            href="/register"
+            href="/signup"
             className="inline-flex min-h-[48px] w-full shrink-0 items-center justify-center rounded-[6px] bg-[#455EFF] px-7 font-sans text-[14px] font-medium leading-[20px] text-white transition-colors hover:bg-[#354CEB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5968FF] lg:w-[224px]"
           >
             Create your account

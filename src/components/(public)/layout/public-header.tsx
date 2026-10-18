@@ -75,7 +75,7 @@ export function PublicHeader() {
         <div className="border-t border-[#343541] px-6 py-5 lg:hidden">
           <nav aria-label="Mobile navigation" className="flex flex-col gap-5">
             <Link
-              href="/#features"
+              href="/features"
               onClick={() => setMenuOpen(false)}
               className={navLinkClass}
             >
@@ -83,7 +83,7 @@ export function PublicHeader() {
             </Link>
 
             <Link
-              href="/#how-it-works"
+              href="/how-it-works"
               onClick={() => setMenuOpen(false)}
               className={navLinkClass}
             >

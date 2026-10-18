@@ -56,7 +56,7 @@ export default function HowItWorksPage() {
           How Provera AI works
         </p>
 
-        <h1 className="mt-7 max-w-[760px] font-manrope text-[38px] font-bold leading-[1.1] tracking-[-0.7px] text-[#EDEFFF] sm:text-[48px] md:text-[56px]">
+        <h1 className="mt-7 max-w-[760px] font-manrope text-[30px] font-bold leading-[56px] tracking-[-0.5px] text-[#EDEFFF] sm:text-[42px] md:text-[48px]">
           From transaction data
           <br />
           to a clearer review.
@@ -68,8 +68,8 @@ export default function HowItWorksPage() {
         </p>
 
         <Link
-          href="/register"
-          className="mt-6 inline-flex min-h-[48px] w-full max-w-[224px] items-center justify-center rounded-[6px] bg-[#455EFF] px-6 font-sans text-[14px] font-medium leading-[20px] text-white transition-colors hover:bg-[#354CEB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5968FF] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+          href="/signup"
+          className="mt-6 inline-flex min-h-[48px] w-full max-w-[224px] items-center justify-center rounded-[6px] bg-[#455EFF] px-6 font-sans text-[14px] font-medium leading-[20px] text-[#EDEFFF]transition-colors hover:bg-[#354CEB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5968FF] focus-visible:ring-offset-2 focus-visible:ring-offset-black "
         >
           Create your account
         </Link>
@@ -77,7 +77,7 @@ export default function HowItWorksPage() {
 
       {/* Before you begin */}
       <section className="bg-[#17182B]">
-        <div className="mx-auto w-full max-w-[1400px] px-5 py-7 sm:px-8 sm:py-8 lg:px-[56px]">
+        <div className="mx-auto w-full  px-5 py-7 sm:px-8 md:px-[50px] sm:py-8 lg:px-[160px]">
           <h2 className="font-manrope text-[20px] font-semibold leading-[28px] tracking-[0px] text-[#EDEFFF]">
             Before you begin
           </h2>
@@ -91,7 +91,7 @@ export default function HowItWorksPage() {
       </section>
 
       {/* Four-step workflow */}
-      <section className="mx-auto w-full max-w-[1120px] px-5 py-12 sm:px-8 sm:py-16 lg:py-[76px]">
+      <section className="mx-auto w-full md:px-[50px] lg:px-[160px] px-5 py-12 sm:px-8 sm:py-16  lg:py-[76px]">
         <div className="space-y-6 sm:space-y-8">
           {steps.map((step) => (
             <article
@@ -136,7 +136,7 @@ export default function HowItWorksPage() {
 
       {/* Final call to action */}
       <section className="bg-[#17182B]">
-        <div className="mx-auto flex w-full max-w-[1400px] flex-col gap-6 px-5 py-10 sm:px-8 sm:py-12 lg:flex-row lg:items-center lg:justify-between lg:gap-10 lg:px-[56px] lg:py-[42px]">
+        <div className="mx-auto flex md:px-[50px] w-full max-w-[1400px] flex-col gap-6 px-5 py-10 sm:px-8 sm:py-12 lg:flex-row lg:items-center lg:justify-between lg:gap-10 lg:px-[160px] lg:py-[42px]">
           <div>
             <h2 className="font-manrope text-[24px] font-semibold leading-[32px] tracking-[-0.3px] text-[#EDEFFF] sm:text-[28px] sm:leading-[36px]">
               Ready for your first review?
@@ -148,7 +148,7 @@ export default function HowItWorksPage() {
           </div>
 
           <Link
-            href="/register"
+            href="/signup"
             className="inline-flex min-h-[48px] w-full shrink-0 items-center justify-center rounded-[6px] bg-[#455EFF] px-7 font-sans text-[14px] font-medium leading-[20px] text-white transition-colors hover:bg-[#354CEB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5968FF] lg:w-[224px]"
           >
             Get started
