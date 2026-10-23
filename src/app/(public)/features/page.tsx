@@ -80,7 +80,7 @@ export default function FeaturesPage() {
 
           <Link
             href="/signup"
-            className="mt-6 inline-flex min-h-[48px] w-full max-w-[224px] items-center justify-center rounded-[6px] bg-[#455EFF] px-6 font-sans text-[14px] font-medium leading-[20px] text-[#EDEFFF]transition-colors hover:bg-[#354CEB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5968FF] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+            className="mt-6 inline-flex min-h-[48px] w-full max-w-[224px] items-center justify-center rounded-[6px] bg-[#34E89A] px-6 font-sans text-[14px] font-medium leading-[20px] text-[#0B0C0E] transition-colors hover:bg-[#90EFC5] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5968FF] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
           >
             Get started
           </Link>
@@ -99,9 +99,9 @@ export default function FeaturesPage() {
               return (
                 <article
                   key={feature.category}
-                  className="flex min-h-[192px] items-center gap-5 rounded-[10px] border border-[#202236] bg-[#1C1D27] p-5 sm:gap-6 sm:p-8 "
+                  className="flex min-h-[192px] items-center gap-5 rounded-[10px] border border-[#202236] bg-[#202026] p-5 sm:gap-6 sm:p-8 "
                 >
-                  <div className="flex size-12 shrink-0 items-center justify-center rounded-[8px] bg-[#252D50] text-[#E1E5FF]">
+                  <div className="flex size-12 shrink-0 items-center justify-center rounded-[8px] bg-[#203B30] text-[#E1E5FF]">
                     <Icon size={22} strokeWidth={1.7} aria-hidden="true" />
                   </div>
 
@@ -126,7 +126,7 @@ export default function FeaturesPage() {
       </div>
 
       {/* Bottom call to action */}
-      <section className="mt-8 bg-[#17182B]">
+      <section className="mt-8 bg-[#232329]">
         <div className="mx-auto flex w-full max-w-[1400px] flex-col gap-6 px-5 py-10 sm:px-8 sm:py-12 md:px-[50px] lg:flex-row lg:items-center lg:justify-between lg:px-[160px] lg:py-[42px]">
           <div>
             <h2 className="font-manrope text-[24px] font-semibold leading-[32px] tracking-[-0.3px] text-[#EDEFFF] sm:text-[28px] sm:leading-[36px]">
@@ -140,14 +140,14 @@ export default function FeaturesPage() {
 
           <Link
             href="/signup"
-            className="inline-flex min-h-[48px] w-full shrink-0 items-center justify-center rounded-[6px] bg-[#455EFF] px-7 font-sans text-[14px] font-medium leading-[20px] text-white transition-colors hover:bg-[#354CEB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5968FF] lg:w-[224px]"
+            className="inline-flex min-h-[48px] w-full shrink-0 items-center justify-center rounded-[6px] bg-[#34E89A] px-7 font-sans text-[14px] font-medium leading-[20px] text-[#0B0C0E] transition-colors hover:bg-[#90EFC5] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5968FF] lg:w-[224px]"
           >
             Create your account
           </Link>
         </div>
       </section>
 
-      <footer className="bg-[#111216]">
+      <footer className="bg-[#141418]">
         <div className="mx-auto flex w-full max-w-[1400px] flex-col gap-3 px-5 py-7 sm:flex-row sm:items-center sm:justify-between sm:px-8 lg:px-[56px]">
           <Link
             href="/"

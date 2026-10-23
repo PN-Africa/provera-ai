@@ -67,7 +67,7 @@ export function Sidebar() {
 
       {/* Sidebar */}
       <aside
-        className={`fixed left-0 top-[76px] z-40 flex h-[calc(100vh-76px)] w-[240px] flex-col bg-[#111217] px-4 py-4 transition-transform duration-200 ease-in-out ${
+        className={`fixed left-0 top-[76px] z-40 flex h-[calc(100vh-76px)] w-[240px] flex-col bg-[#141418] px-4 py-4 transition-transform duration-200 ease-in-out ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         } lg:translate-x-0`}
       >
@@ -104,8 +104,8 @@ export function Sidebar() {
                 onClick={() => setIsOpen(false)}
                 className={`flex h-[44px] items-center rounded-lg px-4 font-sans text-[14px] font-normal leading-[20px] transition ${
                   isActive
-                    ? "bg-[#252D55] text-[#EDEFFF]"
-                    : "text-[#EDEFFF] hover:bg-[#1C1D27]"
+                    ? "bg-[#203B30] text-[#EDEFFF]"
+                    : "text-[#EDEFFF] hover:bg-[#172B23]"
                 }`}
               >
                 {item.label}
@@ -115,8 +115,8 @@ export function Sidebar() {
         </nav>
 
         {/* Disclaimer */}
-        <div className="mt-4 rounded-lg border border-[#343644] bg-[#171A2E] px-4 py-4">
-          <p className="font-sans text-[14px] font-normal leading-[20px] text-[#B7B9CB]">
+        <div className="mt-4 rounded-lg border border-[#343644] bg-[#232329] px-4 py-4">
+          <p className="font-sans text-[14px] font-normal leading-[20px] text-[#A8ADB8]">
             A signal starts a review. It does not confirm fraud.
           </p>
         </div>

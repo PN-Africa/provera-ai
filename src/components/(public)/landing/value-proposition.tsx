@@ -58,7 +58,7 @@ export function ValueProposition() {
           {valuePropositions.map((item) => (
             <article
               key={item.category}
-              className="flex min-h-[228px] flex-col gap-3 rounded-xl border border-[#343644] bg-[#1C1D27] p-6"
+              className="flex min-h-[228px] flex-col gap-3 rounded-xl border border-[#3A3A43] bg-[#202026] p-6"
             >
               {/* Category */}
               <p className="font-sans text-[12px] font-medium leading-[18px] tracking-[0px] text-[#B7B9CB]">

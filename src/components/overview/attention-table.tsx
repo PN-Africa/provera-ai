@@ -113,7 +113,7 @@ export function AttentionTable() {
       {/* View all flagged */}
       <Link
         href="/workspace/flagged-transactions"
-        className="mt-6 flex h-[44px] w-[195px] items-center justify-center rounded-lg border border-[#343644] bg-[#1C1D27] px-4 font-sans text-[14px] font-medium leading-[20px] text-[#EDEFFF] transition hover:bg-[#252630]"
+        className="mt-6 flex h-[44px] w-[195px] items-center justify-center rounded-lg border border-[#343644] bg-[#34E89A] px-4 font-sans text-[14px] font-medium leading-[20px] text-[#0B0C0E] transition hover:bg-[#90EFC5]"
       >
         View all flagged
       </Link>

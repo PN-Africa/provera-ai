@@ -51,7 +51,7 @@ export function RequestAccessForm() {
           type="email"
           placeholder="you@company.com"
           {...register("email")}
-          className="mt-2 h-12 w-full rounded-lg border border-[#343541] bg-[#0d0e12] px-4 font-sans text-[14px] leading-[20px] tracking-[0px] text-white outline-none placeholder:text-[#B7B9CB] focus:border-[#4b63ff]"
+          className="mt-2 h-12 w-full rounded-lg border border-[#343541] bg-[#0d0e12] px-4 font-sans text-[14px] leading-[20px] tracking-[0px] text-white outline-none placeholder:text-[#B7B9CB] focus:border-[#203B30]"
         />
 
         {errors.email && (
@@ -75,7 +75,7 @@ export function RequestAccessForm() {
           type="text"
           placeholder="Enter your team or organization"
           {...register("workspaceName")}
-          className="mt-2 h-12 w-full rounded-lg border border-[#343541] bg-[#0d0e12] px-4 font-sans text-[14px] leading-[20px] tracking-[0px] text-white outline-none placeholder:text-[#B7B9CB] focus:border-[#4b63ff]"
+          className="mt-2 h-12 w-full rounded-lg border border-[#343541] bg-[#0d0e12] px-4 font-sans text-[14px] leading-[20px] tracking-[0px] text-white outline-none placeholder:text-[#B7B9CB] focus:border-[#203B30]"
         />
 
         {errors.workspaceName && (
@@ -99,7 +99,7 @@ export function RequestAccessForm() {
           type="text"
           placeholder="Tell us how you will use Provera AI"
           {...register("reason")}
-          className="mt-2 h-12 w-full rounded-lg border border-[#343541] bg-[#0d0e12] px-4 font-sans text-[14px] leading-[20px] tracking-[0px] text-white outline-none placeholder:text-[#B7B9CB] focus:border-[#4b63ff]"
+          className="mt-2 h-12 w-full rounded-lg border border-[#343541] bg-[#0d0e12] px-4 font-sans text-[14px] leading-[20px] tracking-[0px] text-white outline-none placeholder:text-[#B7B9CB] focus:border-[#203B30]"
         />
 
         {errors.reason && (
@@ -119,7 +119,7 @@ export function RequestAccessForm() {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="h-12 w-full rounded-lg bg-[#455EFF] font-sans text-[14px] font-medium leading-[20px] tracking-[0px] text-[#EDEFFF] transition hover:bg-[#455EFF] disabled:cursor-not-allowed disabled:opacity-60"
+        className="h-12 w-full rounded-lg bg-[#34E89A] font-sans text-[14px] font-medium leading-[20px] tracking-[0px] text-[#0B0C0E] transition hover:bg-[#90EFC5] disabled:cursor-not-allowed disabled:opacity-60"
       >
         {isSubmitting ? "Sending request..." : "Send access request"}
       </button>

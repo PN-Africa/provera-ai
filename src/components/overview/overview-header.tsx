@@ -17,7 +17,7 @@ export function OverviewHeader() {
 
       <Link
         href="/workspace/transaction-data"
-        className="mt-6 flex h-[46px] w-[214px] items-center justify-center rounded-lg bg-[#455EFF] px-4 font-sans text-[14px] font-medium leading-[20px] text-[#EDEFFF] transition hover:bg-[#4057E6]"
+        className="mt-6 flex h-[46px] w-[214px] items-center justify-center rounded-lg bg-[#34E89A] px-4 font-sans text-[14px] font-medium leading-[20px] text-[#0B0C0E] transition hover:bg-[#90EFC5]"
       >
         Add transaction data
       </Link>

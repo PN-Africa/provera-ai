@@ -46,7 +46,7 @@ export default function FAQPage() {
         </div>
 
         {/* Request access callout */}
-        <section className="mt-8 flex flex-col gap-5 rounded-[8px] border border-[#202236] bg-[#171A2E] px-5 py-6 sm:flex-row sm:items-center sm:justify-between sm:px-6">
+        <section className="mt-8 flex flex-col gap-5 rounded-[8px] border border-[#202236] bg-[#232329] px-5 py-6 sm:flex-row sm:items-center sm:justify-between sm:px-6">
           <div>
             <h2 className="font-manrope text-[20px] sm:text-[14px] font-semibold leading-[28px] tracking-[0px] text-[#EDEFFF]">
               Need help joining your team?
@@ -59,7 +59,7 @@ export default function FAQPage() {
 
           <Link
             href="/request-access"
-            className="inline-flex min-h-[36px] items-center justify-center rounded-[5px] border border-[#343644] bg-[#1C1D27] px-6 text-[14px] sm:text-[11px] font-medium text-[#EDEFFF] transition-colors hover:border-[#5968FF] hover:bg-[#242635] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5968FF]"
+            className="inline-flex min-h-[36px] items-center justify-center rounded-[5px] border border-[#3A3A43] bg-[#202026] px-6 text-[14px] sm:text-[11px] font-medium text-[#EDEFFF] transition-colors hover:border-[#202026] hover:bg-[#202026] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3A3A43]"
           >
             Request access
           </Link>

@@ -4,8 +4,8 @@ import { AuthCard } from "@/components/(public)/auth/auth-card";
 
 export default function LoginPage() {
   return (
-    <main className="min-h-screen bg-#18181D] px-4 py-16 text-white">
-      <div className="mx-auto flex w-full max-w-[500px] flex-col items-center gap-8">
+    <main className="min-h-screen bg-[#18181D] px-4 py-16 text-white">
+      <div className="mx-auto flex w-full max-w-[500px] flex-col items-center gap-8 ">
         <AuthHeader />
 
         <AuthCard>
@@ -38,7 +38,7 @@ export default function LoginPage() {
                   id="email"
                   type="email"
                   placeholder="you@company.com"
-                  className="mt-2 h-12 w-full rounded-lg border border-[#343541] bg-[#0d0e12] px-4 text-[14px] text-white outline-none placeholder:text-[#B7B9CB] focus:border-[#4b63ff] font-sans leading-[20px] tracking-[0px]"
+                  className="mt-2 h-12 w-full rounded-lg border border-[#343541] bg-[#0B0C0E] px-4 text-[14px] text-white outline-none placeholder:text-[#B7B9CB] focus:border-[#203B30] font-sans leading-[20px] tracking-[0px]"
                 />
               </div>
 
@@ -54,7 +54,7 @@ export default function LoginPage() {
                   id="password"
                   type="password"
                   placeholder="Enter your password"
-                  className="mt-2 h-12 w-full rounded-lg font-sans border border-[#343644] bg-[#0d0e12] px-4  text-white outline-none placeholder:text-[#B7B9CB] focus:border-[#4b63ff] text-[14px] font-medium  leading-[20px] tracking-[0px] "
+                  className="mt-2 h-12 w-full rounded-lg font-sans border border-[#343644] bg-[#0B0C0E] px-4  text-white outline-none placeholder:text-[#B7B9CB] focus:border-[#203B30] text-[14px] font-medium  leading-[20px] tracking-[0px] "
                 />
               </div>
 
@@ -72,7 +72,7 @@ export default function LoginPage() {
               </Link> */}
               <Link
                 href="/workspace/overview"
-                className="flex h-12 w-full items-center justify-center rounded-lg bg-[#455EFF] font-sans text-[14px] font-medium leading-[20px] tracking-[0px] text-[#EDEFFF] transition hover:bg-[#455EFF]"
+                className="flex h-12 w-full items-center justify-center rounded-lg bg-[#34E89A] font-sans text-[14px] font-medium leading-[20px] tracking-[0px] text-[#0B0C0E] transition hover:bg-[#90EFC5]"
               >
                 Sign in
               </Link>

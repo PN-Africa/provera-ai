@@ -81,7 +81,7 @@ export function TransactionActivity() {
 
             <Bar
               dataKey="transactions"
-              fill="#455EFF"
+              fill="#34E89A"
               radius={[0, 0, 0, 0]}
               barSize={54}
               label={{

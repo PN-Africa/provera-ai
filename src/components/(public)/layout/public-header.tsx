@@ -26,7 +26,7 @@ export function PublicHeader() {
             width={182}
             height={29}
             priority
-            className="h-auto w-full"
+            className="block h-[29px] w-[182px]"
           />
         </Link>
 
@@ -51,7 +51,7 @@ export function PublicHeader() {
         {/* Desktop sign in */}
         <Link
           href="/login"
-          className="ml-auto hidden h-[46px] w-[191px] shrink-0 items-center justify-center rounded-[9px] bg-[#455EFF] px-4 font-[family-name:var(--font-dm-sans)] text-[14px] font-medium leading-5 text-[#EDEFFF] transition-colors hover:bg-[#4057E6] lg:flex"
+          className="ml-auto hidden h-[46px] w-[191px] shrink-0 items-center justify-center rounded-[9px] bg-[#34E89A] px-4 font-[family-name:var(--font-dm-sans)] text-[14px] font-medium leading-5 text-[#0B0C0E] transition-colors hover:bg-[#90EFC5] lg:flex"
         >
           Sign in
         </Link>
@@ -101,7 +101,7 @@ export function PublicHeader() {
             <Link
               href="/login"
               onClick={() => setMenuOpen(false)}
-              className="flex h-12 items-center justify-center rounded-lg bg-[#455EFF] font-[family-name:var(--font-dm-sans)] text-[14px] font-medium leading-5 text-[#EDEFFF] transition-colors hover:bg-[#4057E6]"
+              className="flex h-12 items-center justify-center rounded-lg bg-[#34E89A] font-[family-name:var(--font-dm-sans)] text-[14px] font-medium leading-5 text-[#0B0C0E] transition-colors hover:bg-[#90EFC5]"
             >
               Sign in
             </Link>
