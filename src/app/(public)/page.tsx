@@ -12,7 +12,7 @@ export default function HomePage() {
     <main className="min-h-screen bg-[#18181D]">
       <PublicHeader />
       <Hero />
-      <HeroSection />
+      {/* <HeroSection /> */}
       <ValueProposition />
       <HowItWorks />
       <FAQ />
