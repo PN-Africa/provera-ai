@@ -1,5 +1,5 @@
 import type { Transaction } from "@/components/(dashboard)/transactions/transaction-table";
-import type { ValidationError } from "@/components/transaction-data/validation-errors";
+import type { ValidationError } from "@/components/(dashboard)/transaction-data/validation-errors";
 
 export type PageState =
   | "upload"

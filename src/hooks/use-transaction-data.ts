@@ -4,13 +4,6 @@ import { useRef, useState, type ChangeEvent } from "react";
 
 import { useTransactions } from "@/components/(dashboard)/transactions/transaction-context";
 
-// import type { ValidationError } from "@/components/transaction-data/validation-errors";
-
-// import {
-//   SYNTHETIC_DATASETS,
-//   type SyntheticDatasetId,
-// } from "@/components/transaction-data/synthetic-datasets";
-
 import type { Transaction } from "@/components/(dashboard)/transactions/transaction-table";
 
 import { analyzeRecords } from "@/lib/transaction-data/demo-analysis";
