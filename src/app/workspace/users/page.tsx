@@ -4,7 +4,7 @@ import { WorkspaceMembers } from "@/components/users/workspace-members";
 
 export default function UsersPage() {
   return (
-    <div className="min-h-screen bg-black px-10 py-10 text-[#EDEFFF]">
+    <div className="min-h-screen bg-black text-[#EDEFFF]">
       <UsersHeader />
 
       <WorkspaceMembers />

@@ -1,6 +1,6 @@
 export function WorkspaceMembers() {
   return (
-    <section className="mt-6 rounded-[10px] border border-[#343644] bg-[#1C1D27] px-6 py-6">
+    <section className="mt-6 rounded-[10px] border border-[#3A3A43] bg-[#202026] px-6 py-6">
       <h2 className="font-manrope text-[20px] font-semibold leading-[28px] text-[#EDEFFF]">
         Workspace members
       </h2>

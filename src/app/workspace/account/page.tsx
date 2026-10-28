@@ -1,9 +1,9 @@
-import { AccountHeader } from "@/components/account/account-header";
-import { GuidanceCard } from "@/components/account/guidance-card";
+import { AccountHeader } from "@/components/(dashboard)/account/account-header";
+import { GuidanceCard } from "@/components/(dashboard)/account/guidance-card";
 
 export default function AccountPage() {
   return (
-    <div className="min-h-screen bg-black px-4 py-8 text-[#EDEFFF] sm:px-6 lg:px-10 lg:py-10">
+    <div className="min-h-screen bg-black text-[#EDEFFF] ">
       <AccountHeader />
 
       <GuidanceCard />

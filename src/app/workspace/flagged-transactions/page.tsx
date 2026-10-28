@@ -1,11 +1,11 @@
 "use client";
 
-import { TransactionFilters } from "@/components/transactions/transaction-filters";
-import { TransactionTable } from "@/components/transactions/transaction-table";
-import { TransactionDisclaimer } from "@/components/transactions/transaction-disclaimer";
-import { TransactionsHeader } from "@/components/transactions/transaction-header";
+import { TransactionFilters } from "@/components/(dashboard)/transactions/transaction-filters";
+import { TransactionTable } from "@/components/(dashboard)/transactions/transaction-table";
+import { TransactionDisclaimer } from "@/components/(dashboard)/transactions/transaction-disclaimer";
+import { TransactionsHeader } from "@/components/(dashboard)/transactions/transaction-header";
 import { useTransactionFilters } from "@/hooks/use-transaction-filters";
-import { useTransactions } from "@/components/transactions/transaction-context";
+import { useTransactions } from "@/components/(dashboard)/transactions/transaction-context";
 
 export default function FlaggedTransactionsPage() {
   const { transactions } = useTransactions();
@@ -25,7 +25,7 @@ export default function FlaggedTransactionsPage() {
   } = useTransactionFilters(flaggedTransactions);
 
   return (
-    <div className="min-h-screen bg-black px-4 py-8 text-[#EDEFFF] sm:px-6 lg:px-10 lg:py-10">
+    <div className="min-h-screen bg-black  text-[#EDEFFF] ">
       <TransactionsHeader
         title="Flagged transactions"
         description="Prioritize unusual activity and inspect the evidence."

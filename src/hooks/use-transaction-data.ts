@@ -2,21 +2,26 @@
 
 import { useRef, useState, type ChangeEvent } from "react";
 
-import { useTransactions } from "@/components/transactions/transaction-context";
+import { useTransactions } from "@/components/(dashboard)/transactions/transaction-context";
 
-import type { ValidationError } from "@/components/transaction-data/validation-errors";
+// import type { ValidationError } from "@/components/transaction-data/validation-errors";
 
-import {
-  SYNTHETIC_DATASETS,
-  type SyntheticDatasetId,
-} from "@/components/transaction-data/synthetic-datasets";
+// import {
+//   SYNTHETIC_DATASETS,
+//   type SyntheticDatasetId,
+// } from "@/components/transaction-data/synthetic-datasets";
 
-import type { Transaction } from "@/components/transactions/transaction-table";
+import type { Transaction } from "@/components/(dashboard)/transactions/transaction-table";
 
 import { analyzeRecords } from "@/lib/transaction-data/demo-analysis";
 import { validateCsv } from "@/lib/transaction-data/csv-validation";
 
 import type { CsvRecord, PageState } from "@/lib/transaction-data/types";
+import {
+  SYNTHETIC_DATASETS,
+  SyntheticDatasetId,
+} from "@/components/(dashboard)/transaction-data/synthetic-datasets";
+import { ValidationError } from "@/components/(dashboard)/transaction-data/validation-errors";
 
 const MAX_FILE_BYTES = 1024 * 1024;
 

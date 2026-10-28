@@ -5,8 +5,8 @@ import { useMemo, useState } from "react";
 import type {
   RiskFilter,
   TransactionSort,
-} from "@/components/transactions/transaction-filters";
-import { Transaction } from "@/components/transactions/transaction-table";
+} from "@/components/(dashboard)/transactions/transaction-filters";
+import { Transaction } from "@/components/(dashboard)/transactions/transaction-table";
 
 export function useTransactionFilters(data: Transaction[]) {
   const [search, setSearch] = useState("");

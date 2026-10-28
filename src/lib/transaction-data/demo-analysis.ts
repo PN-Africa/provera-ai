@@ -1,4 +1,4 @@
-import type { Transaction } from "@/components/transactions/transaction-table";
+import type { Transaction } from "@/components/(dashboard)/transactions/transaction-table";
 import type { CsvRecord } from "@/lib/transaction-data/types";
 
 function formatDate(dateTime: string): string {

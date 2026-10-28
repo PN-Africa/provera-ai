@@ -1,3 +1,4 @@
+import Link from "next/link";
 import WaveCanvas from "./WaveCanvas";
 
 export default function Hero() {
@@ -24,12 +25,18 @@ export default function Hero() {
           understand what triggered it, and focus your next review.
         </p>
 
-        <button
+        {/* <button
           type="button"
           className="cursor-pointer rounded-lg bg-accent px-5 py-4 text-[15px] leading-none font-medium text-accent-ink transition hover:brightness-110 active:translate-y-px focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-text"
         >
           Create your account
-        </button>
+        </button> */}
+        <Link
+          href="/signup"
+          className="inline-flex min-h-[46px] items-center justify-center rounded-lg bg-[#34E89A] px-5 text-sm font-medium text-[#0B0C0E] transition-colors hover:bg-[#5af0b4] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#32e6a0] focus-visible:ring-offset-2 focus-visible:ring-offset-[#17181c]"
+        >
+          Create your account
+        </Link>
 
         <p className="mt-6 flex flex-wrap justify-center gap-3 text-xs">
           <span>Explainable indicators</span>
