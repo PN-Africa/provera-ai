@@ -1,4 +1,4 @@
-import { WorkspaceUser } from "./user-types";
+import type { WorkspaceUser } from "./user-types";
 
 type UsersTableProps = {
   users: WorkspaceUser[];
@@ -28,12 +28,29 @@ export function UsersTable({ users, onManage }: UsersTableProps) {
           {users.map((user) => (
             <tr key={user.id} className="text-sm text-[#EDEFFF]">
               <td className="px-3 py-4">
-                {user.name}
-                {user.owner ? " · Owner" : ""}
+                <p>
+                  {user.name}
+                  {user.owner ? " · Owner" : ""}
+                </p>
+                <p className="mt-1 text-xs text-[#A8ADB8]">{user.email}</p>
               </td>
+
               <td className="px-3 py-4">{user.role}</td>
-              <td className="px-3 py-4">{user.status}</td>
-              <td className="px-3 py-4">{user.lastActive}</td>
+
+              <td className="px-3 py-4">
+                <span
+                  className={`rounded-full border px-3 py-1 text-xs ${
+                    user.status === "Active"
+                      ? "border-[#34E89A]/30 bg-[#34E89A]/10 text-[#34E89A]"
+                      : "border-gray-500/30 bg-gray-500/10 text-gray-400"
+                  }`}
+                >
+                  {user.status}
+                </span>
+              </td>
+
+              <td className="px-3 py-4 text-[#B7B9CB]">{user.lastActive}</td>
+
               <td className="px-3 py-4">
                 <button
                   type="button"

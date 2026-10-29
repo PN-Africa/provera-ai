@@ -1,10 +1,25 @@
 "use client";
-
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { logout } from "@/lib/api/auth";
 export function GuidanceCard() {
-  function handleSignOut() {
-    console.log("Sign out");
-  }
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
+  async function handleSignOut() {
+    if (loading) return;
+
+    setLoading(true);
+
+    try {
+      await logout();
+    } catch (error) {
+      console.error("Logout request failed:", error);
+    } finally {
+      router.replace("/login");
+      router.refresh();
+    }
+  }
   return (
     <>
       <section className="mt-6 rounded-[10px] border border-[#343644] bg-[#202026] px-6 py-6">
@@ -57,9 +72,10 @@ export function GuidanceCard() {
       <button
         type="button"
         onClick={handleSignOut}
-        className="mt-6 flex h-[46px] w-[180px] items-center justify-center rounded-[6px] border border-[#90EFC5] bg-[#34E89A] font-sans text-[14px] font-medium leading-[20px] text-[#0B0C0E] transition hover:bg-[#90EFC5]"
+        disabled={loading}
+        className="mt-6 flex h-[46px] w-[180px] items-center justify-center rounded-[6px] border border-[#90EFC5] bg-[#34E89A] font-sans text-[14px] font-medium leading-[20px] text-[#0B0C0E] transition hover:bg-[#90EFC5] disabled:cursor-not-allowed disabled:opacity-60"
       >
-        Sign out
+        {loading ? "Signing out..." : "Sign out"}
       </button>
     </>
   );

@@ -1,18 +1,31 @@
-// import axios from "axios";
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
-// const api = axios.create({
-//   baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
-//   headers: {
-//     "Content-Type": "application/json",
-//   },
-// });
+if (!API_BASE_URL) {
+  throw new Error("NEXT_PUBLIC_API_URL is not configured");
+}
 
-// export default api;
-// src/lib/api.ts
-import axios from "axios";
+export async function apiRequest<T>(
+  endpoint: string,
+  options: RequestInit = {},
+): Promise<T> {
+  const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+    ...options,
+    headers: {
+      "Content-Type": "application/json",
+      ...options.headers,
+    },
+    credentials: "include",
+    cache: "no-store",
+  });
 
-const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
-});
+  if (!response.ok) {
+    const error = await response.text();
+    throw new Error(error || `Request failed: ${response.status}`);
+  }
 
-export default api;
+  if (response.status === 204) {
+    return undefined as T;
+  }
+
+  return response.json() as Promise<T>;
+}

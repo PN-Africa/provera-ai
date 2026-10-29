@@ -66,6 +66,10 @@ const adminNavigation = [
     label: "Platform settings",
     href: "/admin/platform-settings",
   },
+  {
+    label: "Logout",
+    href: "/admin/logout",
+  },
 ];
 
 export function AdminSidebar() {
