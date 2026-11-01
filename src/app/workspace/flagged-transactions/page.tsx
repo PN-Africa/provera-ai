@@ -11,7 +11,8 @@ export default function FlaggedTransactionsPage() {
   const { transactions } = useTransactions();
 
   const flaggedTransactions = transactions.filter(
-    (transaction) => transaction.risk !== "Low risk",
+    (transaction) => transaction.risk === "High risk",
+    //  || transaction.risk === "Medium risk",
   );
 
   const {

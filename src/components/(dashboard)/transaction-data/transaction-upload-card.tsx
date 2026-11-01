@@ -24,6 +24,11 @@ interface TransactionUploadCardProps {
   totalRecords: number;
   validRecords: number;
   invalidRecords: number;
+  uploadError?: string;
+  uploadResult?: {
+    uploadId?: string;
+    status: string;
+  } | null;
 }
 
 export function TransactionUploadCard({
@@ -39,6 +44,8 @@ export function TransactionUploadCard({
   totalRecords,
   validRecords,
   invalidRecords,
+  uploadError,
+  uploadResult,
 }: TransactionUploadCardProps) {
   return (
     <div className="rounded-xl border border-[#343644] bg-[#232329] p-6">
@@ -47,7 +54,7 @@ export function TransactionUploadCard({
       </h2>
 
       <p className="mt-3 font-sans text-[14px] font-normal leading-[20px] text-[#B7B9CB]">
-        CSV · Up to 1 MB · Maximum 500 records
+        CSV · Up to 5 MB
       </p>
 
       <div className="mt-4 rounded-xl border border-[#343644] bg-[#232329] p-8">
@@ -100,7 +107,20 @@ export function TransactionUploadCard({
         {pageState === "validation-error" && (
           <ValidationErrors errors={validationErrors} />
         )}
+        {uploadError && (
+          <p
+            role="alert"
+            className="rounded-lg border border-red-500/30 bg-red-500/10 p-3 text-sm text-red-400"
+          >
+            {uploadError}
+          </p>
+        )}
 
+        {uploadResult && (
+          <p className="text-sm text-[#B7B9CB]">
+            Upload status: {uploadResult.status}
+          </p>
+        )}
         {pageState === "valid" && (
           <ValidDataset
             totalRecords={totalRecords}

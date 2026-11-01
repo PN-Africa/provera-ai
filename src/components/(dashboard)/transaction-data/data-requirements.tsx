@@ -1,9 +1,9 @@
 const requiredColumns = [
-  "transaction_id",
+  "transactionId",
   "amount",
   "currency",
-  "date_time",
-  "transaction_type",
+  "timestamp",
+  "type",
 ];
 
 const optionalColumns = ["customer_id", "location", "payment_method"];

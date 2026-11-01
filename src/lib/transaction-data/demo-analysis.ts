@@ -49,10 +49,10 @@ export function analyzeRecords(records: CsvRecord[]): Transaction[] {
     }
 
     return {
-      id: record.transaction_id,
+      id: record.transactionId,
       amount: `${record.currency} ${record.amount.toLocaleString("en-NG")}`,
       risk,
-      date: formatDate(record.date_time),
+      date: formatDate(record.timestamp),
       indicator,
     };
   });

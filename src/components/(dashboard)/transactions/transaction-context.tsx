@@ -1,8 +1,19 @@
 "use client";
 
-import { createContext, useContext, useState, type ReactNode } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+  type ReactNode,
+} from "react";
 
-import { transactions as initialTransactions } from "./transaction-data";
+import {
+  getTransactions,
+  type Transaction as ApiTransaction,
+} from "@/lib/api/transactions";
+
 import type { Transaction } from "./transaction-table";
 
 export type ReviewStatus = "Pending review" | "Reviewed" | "Escalated";
@@ -20,17 +31,62 @@ interface TransactionContextType {
     transactionId: string,
     updates: Partial<TransactionReview>,
   ) => void;
+  isLoading: boolean;
+  error: string | null;
+  refreshTransactions: () => Promise<void>;
 }
 
 const TransactionContext = createContext<TransactionContextType | undefined>(
   undefined,
 );
 
-export function TransactionProvider({ children }: { children: ReactNode }) {
-  const [transactions, setTransactions] =
-    useState<Transaction[]>(initialTransactions);
+function toTableTransaction(transaction: ApiTransaction): Transaction {
+  const riskLabels = {
+    HIGH: "High risk",
+    MEDIUM: "Medium risk",
+    LOW: "Low risk",
+  } as const;
 
+  return {
+    id: transaction.id,
+    amount: `${transaction.currency} ${Number(transaction.amount).toLocaleString()}`,
+    risk: riskLabels[transaction.riskLevel],
+    date: new Date(transaction.occurredAt).toLocaleString(),
+    indicator: transaction.flagged ? "Flagged for review" : "—",
+  };
+}
+
+export function TransactionProvider({ children }: { children: ReactNode }) {
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [reviews, setReviews] = useState<Record<string, TransactionReview>>({});
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const refreshTransactions = useCallback(async () => {
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      const response = await getTransactions({ page: 1, limit: 100 });
+      setTransactions(response.data.map(toTableTransaction));
+    } catch (err) {
+      setError(
+        err instanceof Error
+          ? err.message
+          : "Could not load transactions. Please try again.",
+      );
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      void refreshTransactions();
+    }, 0);
+
+    return () => clearTimeout(timer);
+  }, [refreshTransactions]);
 
   const updateReview = (
     transactionId: string,
@@ -53,6 +109,9 @@ export function TransactionProvider({ children }: { children: ReactNode }) {
         setTransactions,
         reviews,
         updateReview,
+        isLoading,
+        error,
+        refreshTransactions,
       }}
     >
       {children}

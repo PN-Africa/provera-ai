@@ -33,7 +33,7 @@ export const faqCategories: FAQCategory[] = [
       {
         question: "What should my CSV include?",
         answer:
-          "Include transaction_id, amount, currency, date_time, and transaction_type. Customer ID, location, and payment method add context. Download the template from the upload screen.",
+          "Include transactionId, amount, currency, timestamp, and type. Customer ID, location, and payment method add context. Download the template from the upload screen.",
       },
       {
         question: "What happens if my file has validation errors?",

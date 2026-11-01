@@ -9,11 +9,11 @@ export type PageState =
   | "complete";
 
 export type CsvRecord = {
-  transaction_id: string;
+  transactionId: string;
   amount: number;
   currency: string;
-  date_time: string;
-  transaction_type: string;
+  timestamp: string;
+  type: string;
   customer_id: string;
   location: string;
   payment_method: string;

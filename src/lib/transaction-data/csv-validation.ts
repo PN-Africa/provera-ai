@@ -5,11 +5,11 @@ import type {
 } from "@/lib/transaction-data/types";
 
 const REQUIRED_COLUMNS = [
-  "transaction_id",
+  "transactionId",
   "amount",
   "currency",
-  "date_time",
-  "transaction_type",
+  "timestamp",
+  "type",
 ] as const;
 
 function parseCsv(text: string): string[][] {
@@ -74,12 +74,7 @@ export function validateCsv(text: string): CsvValidationResult {
     };
   }
 
-  const headers = rows[0].map((header) =>
-    header
-      .replace(/^\uFEFF/, "")
-      .trim()
-      .toLowerCase(),
-  );
+  const headers = rows[0].map((header) => header.replace(/^\uFEFF/, "").trim());
 
   const missingColumns = REQUIRED_COLUMNS.filter(
     (column) => !headers.includes(column),
@@ -103,13 +98,6 @@ export function validateCsv(text: string): CsvValidationResult {
   const records: CsvRecord[] = [];
   const seenIds = new Set<string>();
 
-  if (dataRows.length > 500) {
-    errors.push({
-      row: "CSV file",
-      message: "The file exceeds the maximum of 500 records.",
-    });
-  }
-
   dataRows.forEach((values, index) => {
     const rowLabel = `Row ${index + 2}`;
 
@@ -119,12 +107,12 @@ export function validateCsv(text: string): CsvValidationResult {
       return columnIndex === -1 ? "" : (values[columnIndex] ?? "").trim();
     };
 
-    const id = getValue("transaction_id");
+    const id = getValue("transactionId");
     const rawAmount = getValue("amount");
     const amount = Number(rawAmount);
     const currency = getValue("currency");
-    const dateTime = getValue("date_time");
-    const transactionType = getValue("transaction_type");
+    const timestamp = getValue("timestamp");
+    const transactionType = getValue("type");
 
     let invalid = false;
 
@@ -166,9 +154,9 @@ export function validateCsv(text: string): CsvValidationResult {
       invalid = true;
     }
 
-    const hasTimezone = /(?:Z|[+-]\d{2}:\d{2})$/i.test(dateTime);
+    const hasTimezone = /(?:Z|[+-]\d{2}:\d{2})$/i.test(timestamp);
 
-    if (!dateTime || !hasTimezone || Number.isNaN(Date.parse(dateTime))) {
+    if (!timestamp || !hasTimezone || Number.isNaN(Date.parse(timestamp))) {
       errors.push({
         row: rowLabel,
         message:
@@ -198,14 +186,14 @@ export function validateCsv(text: string): CsvValidationResult {
 
     if (!invalid) {
       records.push({
-        transaction_id: id,
+        transactionId: id,
         amount,
         currency,
-        date_time: dateTime,
-        transaction_type: transactionType,
-        customer_id: getValue("customer_id"),
+        timestamp: timestamp,
+        type: transactionType,
+        customer_id: getValue("customerId"),
         location: getValue("location"),
-        payment_method: getValue("payment_method"),
+        payment_method: getValue("paymentMethod"),
       });
     }
   });

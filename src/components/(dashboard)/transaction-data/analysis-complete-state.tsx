@@ -26,17 +26,18 @@ export function AnalysisCompleteState({
   return (
     <div className="mt-6 rounded-xl border border-[#343644] bg-[#1C1D27] p-6 sm:p-10">
       <h2 className="font-manrope text-[28px] font-semibold leading-[36px] text-[#EDEFFF]">
-        Your demo analysis is ready
+        Your transaction analysis is ready
       </h2>
 
       <p className="mt-3 font-sans text-[16px] font-normal leading-[24px] text-[#EDEFFF]">
-        {totalAnalyzed} transactions analyzed. {totalFlagged} flagged for human
-        review.
+        <span className="font-semibold">{totalAnalyzed}</span> transactions
+        analyzed. <span className="font-semibold">{totalFlagged}</span> flagged
+        for human review.
       </p>
 
       <p className="mt-2 font-sans text-[13px] leading-[20px] text-[#B7B9CB]">
-        These results use simulated, rule-based indicators for demonstration. A
-        flagged transaction is not proof of fraud.
+        A flagged transaction is not proof of fraud. Review flagged transactions
+        before taking action.
       </p>
 
       <div className="mt-5 flex flex-wrap gap-4">

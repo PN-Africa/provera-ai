@@ -1,27 +1,50 @@
-const stats = [
-  {
-    label: "Transactions analyzed",
-    value: "69",
-    note: "Selected dataset",
-  },
-  {
-    label: "Flagged for review",
-    value: "4",
-    note: "Human review required",
-  },
-  {
-    label: "High risk",
-    value: "2",
-    note: "Highest priority",
-  },
-  {
-    label: "Low / medium risk",
-    value: "67",
-    note: "No high-risk indication",
-  },
-];
+import type { Transaction } from "@/lib/api/upload";
 
-export function OverviewStats() {
+type OverviewStatsProps = {
+  transactions: Transaction[];
+  totalTransactions: number;
+};
+
+export default function OverviewStats({
+  transactions,
+  totalTransactions,
+}: OverviewStatsProps) {
+  const flaggedCount = transactions.filter(
+    (transaction) => transaction.flagged,
+  ).length;
+
+  const highRiskCount = transactions.filter(
+    (transaction) => transaction.riskLevel === "HIGH",
+  ).length;
+
+  const lowMediumCount = transactions.filter(
+    (transaction) =>
+      transaction.riskLevel === "LOW" || transaction.riskLevel === "MEDIUM",
+  ).length;
+
+  const stats = [
+    {
+      label: "Total transactions",
+      value: totalTransactions.toLocaleString(),
+      description: "All transactions",
+    },
+    {
+      label: "Flagged transactions",
+      value: flaggedCount.toLocaleString(),
+      description: "In the loaded transactions",
+    },
+    {
+      label: "High risk",
+      value: highRiskCount.toLocaleString(),
+      description: "In the loaded transactions",
+    },
+    {
+      label: "Low / medium risk",
+      value: lowMediumCount.toLocaleString(),
+      description: "In the loaded transactions",
+    },
+  ];
+
   return (
     <section className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
       {stats.map((stat) => (
@@ -32,13 +55,11 @@ export function OverviewStats() {
           <p className="font-sans text-[14px] font-normal leading-[20px] text-[#B7B9CB]">
             {stat.label}
           </p>
-
           <p className="mt-3 font-manrope text-[32px] font-semibold leading-[40px] tracking-[-0.3px] text-[#EDEFFF]">
             {stat.value}
           </p>
-
           <p className="mt-2 font-sans text-[12px] font-normal leading-[18px] text-[#7F8297]">
-            {stat.note}
+            {stat.description}
           </p>
         </div>
       ))}
