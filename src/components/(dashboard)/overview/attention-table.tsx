@@ -110,6 +110,8 @@ export default function AttentionTable({
 
                     <td className="px-5 font-sans text-[14px] leading-[20px] text-[#EDEFFF]">
                       {formatDate(transaction.occurredAt)}
+
+                      {/* {formatDate(transaction.date)} */}
                     </td>
 
                     <td className="px-5 font-sans text-[14px] leading-[20px] text-[#EDEFFF]">

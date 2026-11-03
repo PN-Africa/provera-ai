@@ -66,48 +66,6 @@ export function TransactionsPageContent({
     });
   }, [transactions, search, riskFilter, sortBy]);
 
-  // return (
-  //   <div className="min-h-screen bg-black text-[#EDEFFF] ">
-  //     <TransactionsHeader
-  //       title="All transactions"
-  //       description="Search and review your selected dataset."
-  //     />
-
-  //     <TransactionFilters
-  //       search={search}
-  //       onSearchChange={setSearch}
-  //       riskFilter={riskFilter}
-  //       onRiskFilterChange={setRiskFilter}
-  //       sortBy={sortBy}
-  //       onSortChange={setSortBy}
-  //     />
-  //     {isLoading ? (
-  //       <p className="mt-6 text-sm text-[#B7B9CB]">Loading transactions...</p>
-  //     ) : error ? (
-  //       <div className="mt-6">
-  //         <p className="text-sm text-[#FF9B9F]">{error}</p>
-  //         <button
-  //           type="button"
-  //           onClick={() => void refreshTransactions()}
-  //           className="mt-2 text-sm text-[#EDEFFF] underline"
-  //         >
-  //           Try again
-  //         </button>
-  //       </div>
-  //     ) : (
-  //       <TransactionTable transactions={filteredTransactions} portal={portal} />
-  //     )}
-
-  //     <TransactionTable transactions={filteredTransactions} portal={portal} />
-
-  //     <p className="mt-6 font-sans text-[12px] font-medium leading-[18px] text-[#B7B9CB]">
-  //       Showing {filteredTransactions.length} of {transactions.length}{" "}
-  //       transactions
-  //     </p>
-
-  //     <TransactionDisclaimer />
-  //   </div>
-  // );
   return (
     <div className="min-h-screen bg-black text-[#EDEFFF]">
       <TransactionsHeader

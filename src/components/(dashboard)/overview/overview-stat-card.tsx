@@ -9,17 +9,19 @@ export default function OverviewStats({
   transactions,
   totalTransactions,
 }: OverviewStatsProps) {
-  const flaggedCount = transactions.filter(
-    (transaction) => transaction.flagged,
-  ).length;
+  // const flaggedCount = transactions.filter(
+  //   (transaction) => transaction.flagged,
+  // ).length;
 
   const highRiskCount = transactions.filter(
     (transaction) => transaction.riskLevel === "HIGH",
   ).length;
 
-  const lowMediumCount = transactions.filter(
-    (transaction) =>
-      transaction.riskLevel === "LOW" || transaction.riskLevel === "MEDIUM",
+  const mediumCount = transactions.filter(
+    (transaction) => transaction.riskLevel === "MEDIUM",
+  ).length;
+  const lowCount = transactions.filter(
+    (transaction) => transaction.riskLevel === "LOW",
   ).length;
 
   const stats = [
@@ -29,18 +31,18 @@ export default function OverviewStats({
       description: "All transactions",
     },
     {
-      label: "Flagged transactions",
-      value: flaggedCount.toLocaleString(),
-      description: "In the loaded transactions",
-    },
-    {
       label: "High risk",
       value: highRiskCount.toLocaleString(),
       description: "In the loaded transactions",
     },
     {
-      label: "Low / medium risk",
-      value: lowMediumCount.toLocaleString(),
+      label: "Medium risk",
+      value: mediumCount.toLocaleString(),
+      description: "In the loaded transactions",
+    },
+    {
+      label: "Low  risk",
+      value: lowCount.toLocaleString(),
       description: "In the loaded transactions",
     },
   ];

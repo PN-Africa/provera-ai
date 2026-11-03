@@ -21,8 +21,8 @@ export default function Hero() {
         </h1>
 
         <p className="mb-8 max-w-[34em] text-[clamp(16px,2vw,18px)] leading-[1.6]">
-          Turn transaction data into clear signals. Find unusual activity,
-          understand what triggered it, and focus your next review.
+          Turn transaction data into clear signals, flag unsual activities and
+          understand what triggered them.
         </p>
 
         {/* <button

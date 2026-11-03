@@ -26,7 +26,6 @@ export function TransactionTable({
   const pageSize = 10;
   const totalPages = Math.ceil(transactions.length / pageSize);
 
-  // Keep the current page valid when filters reduce the results.
   const page = Math.min(currentPage, Math.max(1, totalPages));
 
   const startIndex = (page - 1) * pageSize;

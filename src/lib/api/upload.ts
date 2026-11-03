@@ -186,6 +186,7 @@ export type Transaction = {
   uploadId: string;
   amount: string;
   currency: string;
+  uploadedAt: string;
   occurredAt: string;
   type: string;
   customerId: string;
@@ -243,4 +244,82 @@ export async function getTransactions(
   );
 
   return readResponse<TransactionListResponse>(response);
+}
+
+export type DashboardSummary = {
+  transactions: {
+    total: number;
+    scored: number;
+    flagged: number;
+    flaggedPercent: number;
+  };
+  riskLevels: Record<string, number>;
+  reviewProgress: {
+    open: number;
+    inReview: number;
+    closed: number;
+    cleared: number;
+    escalated: number;
+  };
+  topRules: Array<{
+    rule: string;
+    count: number;
+  }>;
+};
+
+export type DashboardTrendPoint = {
+  period: string;
+  total: number;
+  flagged: number;
+  high: number;
+};
+
+export type DashboardTrends = {
+  from: string;
+  to: string;
+  interval: "day" | "week";
+  timeZone: string;
+  points: DashboardTrendPoint[];
+};
+
+export async function getDashboardSummary(
+  filters: { from?: string; to?: string } = {},
+): Promise<DashboardSummary> {
+  const params = new URLSearchParams();
+
+  if (filters.from) params.set("from", filters.from);
+  if (filters.to) params.set("to", filters.to);
+
+  const query = params.toString();
+  const response = await fetch(
+    `${getApiUrl()}/dashboard/summary${query ? `?${query}` : ""}`,
+    {
+      method: "GET",
+      credentials: "include",
+      cache: "no-store",
+    },
+  );
+
+  return readResponse<DashboardSummary>(response);
+}
+
+export async function getDashboardTrends(
+  filters: { from?: string; to?: string; interval?: "day" | "week" } = {},
+): Promise<DashboardTrends> {
+  const params = new URLSearchParams();
+
+  if (filters.from) params.set("from", filters.from);
+  if (filters.to) params.set("to", filters.to);
+  params.set("interval", filters.interval ?? "day");
+
+  const response = await fetch(
+    `${getApiUrl()}/dashboard/trends?${params.toString()}`,
+    {
+      method: "GET",
+      credentials: "include",
+      cache: "no-store",
+    },
+  );
+
+  return readResponse<DashboardTrends>(response);
 }

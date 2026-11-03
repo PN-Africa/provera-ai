@@ -2,7 +2,7 @@ const requiredColumns = [
   "transactionId",
   "amount",
   "currency",
-  "timestamp",
+  "date time",
   "type",
 ];
 
