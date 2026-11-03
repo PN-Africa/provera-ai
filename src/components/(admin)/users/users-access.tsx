@@ -6,18 +6,19 @@ import { UsersToolbar } from "./users-toolbar";
 import { UsersTable } from "./users-table";
 import { ApproveAnalystModal } from "./approve-analyst-modal";
 import { PendingAnalystsTable } from "./pending-analysts-table";
-import { initialUsers, type WorkspaceUser } from "./user-types";
 import {
   approveAnalyst,
   getPendingAnalysts,
+  getWorkspaceMembers,
   type PendingAnalyst,
+  type WorkspaceMember,
 } from "@/lib/api/users";
 
 export function UsersAccess() {
   const router = useRouter();
 
   const [search, setSearch] = useState("");
-  const [members] = useState<WorkspaceUser[]>(initialUsers);
+  const [members, setMembers] = useState<WorkspaceMember[]>([]);
   const [pendingUsers, setPendingUsers] = useState<PendingAnalyst[]>([]);
 
   const [loading, setLoading] = useState(true);
@@ -27,17 +28,21 @@ export function UsersAccess() {
   const [selectedAnalyst, setSelectedAnalyst] = useState<PendingAnalyst | null>(
     null,
   );
+
   async function loadUsers() {
     setLoading(true);
     setError("");
 
     try {
-      const result = await getPendingAnalysts();
-      setPendingUsers(result);
+      const [membersResponse, pendingResponse] = await Promise.all([
+        getWorkspaceMembers(),
+        getPendingAnalysts(),
+      ]);
+
+      setMembers(membersResponse.data);
+      setPendingUsers(pendingResponse);
     } catch (err) {
-      setError(
-        err instanceof Error ? err.message : "Unable to load pending analysts.",
-      );
+      setError(err instanceof Error ? err.message : "Unable to load users.");
     } finally {
       setLoading(false);
     }
@@ -46,20 +51,22 @@ export function UsersAccess() {
   useEffect(() => {
     let cancelled = false;
 
-    async function fetchPendingUsers() {
+    async function fetchUsers() {
       try {
-        const result = await getPendingAnalysts();
+        const [membersResponse, pendingResponse] = await Promise.all([
+          getWorkspaceMembers(),
+          getPendingAnalysts(),
+        ]);
 
         if (!cancelled) {
-          setPendingUsers(result);
+          setMembers(membersResponse.data);
+          setPendingUsers(pendingResponse);
           setError("");
         }
       } catch (err) {
         if (!cancelled) {
           setError(
-            err instanceof Error
-              ? err.message
-              : "Unable to load pending analysts.",
+            err instanceof Error ? err.message : "Unable to load users.",
           );
         }
       } finally {
@@ -69,7 +76,7 @@ export function UsersAccess() {
       }
     }
 
-    void fetchPendingUsers();
+    void fetchUsers();
 
     return () => {
       cancelled = true;
@@ -81,7 +88,7 @@ export function UsersAccess() {
 
     return members.filter(
       (user) =>
-        user.name.toLowerCase().includes(query) ||
+        user.fullName.toLowerCase().includes(query) ||
         user.email.toLowerCase().includes(query),
     );
   }, [members, search]);
@@ -96,37 +103,10 @@ export function UsersAccess() {
     );
   }, [pendingUsers, search]);
 
-  // async function handleApprove(user: PendingAnalyst) {
-  //   const confirmed = window.confirm(
-  //     `Approve ${user.fullName}? They will be able to sign in after approval.`,
-  //   );
-
-  //   if (!confirmed) return;
-
-  //   setApprovingId(user.id);
-  //   setError("");
-  //   setSuccess("");
-
-  //   try {
-  //     await approveAnalyst(user.id);
-
-  //     setPendingUsers((current) =>
-  //       current.filter((item) => item.id !== user.id),
-  //     );
-
-  //     setSuccess(`${user.fullName} has been approved successfully.`);
-  //   } catch (err) {
-  //     setError(
-  //       err instanceof Error ? err.message : "Unable to approve this analyst.",
-  //     );
-  //   } finally {
-  //     setApprovingId(null);
-  //   }
-  // }
-
-  async function handleApprove(user: PendingAnalyst) {
+  function handleApprove(user: PendingAnalyst) {
     setSelectedAnalyst(user);
   }
+
   async function confirmApproval() {
     if (!selectedAnalyst || approvingId !== null) return;
 
@@ -145,6 +125,10 @@ export function UsersAccess() {
 
       setSelectedAnalyst(null);
       setSuccess(`${user.fullName} has been approved successfully.`);
+
+      // Refresh the workspace-member list after approval.
+      const membersResponse = await getWorkspaceMembers();
+      setMembers(membersResponse.data);
     } catch (err) {
       setError(
         err instanceof Error ? err.message : "Unable to approve this analyst.",
@@ -153,6 +137,7 @@ export function UsersAccess() {
       setApprovingId(null);
     }
   }
+
   return (
     <div className="mx-auto w-full max-w-[1440px] space-y-6">
       <header>
@@ -205,15 +190,24 @@ export function UsersAccess() {
         </h2>
 
         <p className="mt-2 text-sm text-[#A8ADB8]">
-          {filteredMembers.length} member
-          {filteredMembers.length === 1 ? "" : "s"}
+          {loading
+            ? "Loading members..."
+            : `${filteredMembers.length} member${
+                filteredMembers.length === 1 ? "" : "s"
+              } shown`}
         </p>
 
         <div className="mt-4">
-          <UsersTable
-            users={filteredMembers}
-            onManage={(user) => router.push(`/admin/manage-user/${user.id}`)}
-          />
+          {loading ? (
+            <p className="py-10 text-center text-sm text-[#A8ADB8]">
+              Loading members...
+            </p>
+          ) : (
+            <UsersTable
+              users={filteredMembers}
+              onManage={(user) => router.push(`/admin/manage-user/${user.id}`)}
+            />
+          )}
         </div>
       </section>
 
@@ -257,6 +251,7 @@ export function UsersAccess() {
           )}
         </div>
       </section>
+
       <ApproveAnalystModal
         isOpen={selectedAnalyst !== null}
         analystName={selectedAnalyst?.fullName ?? ""}

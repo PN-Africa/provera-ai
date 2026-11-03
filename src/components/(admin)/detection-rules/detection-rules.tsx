@@ -1,31 +1,39 @@
 "use client";
 
+import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { RulesTable, type DetectionRule } from "./rules-table";
 
-const initialRules: DetectionRule[] = [
-  {
-    id: "amount",
-    name: "High transaction amount",
-    condition: "Amount ≥ NGN 500,000",
-    enabled: true,
-  },
-  {
-    id: "frequency",
-    name: "High transaction frequency",
-    condition: "4+ transactions in 10 minutes",
-    enabled: true,
-  },
-  {
-    id: "deviation",
-    name: "Unusual deviation",
-    condition: "Robust deviation ≥ 6",
-    enabled: true,
-  },
-];
+import { RulesTable } from "./rules-table";
+import { DetectionRule, getDetectionRules } from "@/lib/api/rules";
 
 export function DetectionRules() {
   const router = useRouter();
+
+  const [rules, setRules] = useState<DetectionRule[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  const loadRules = useCallback(async () => {
+    try {
+      setError("");
+      const data = await getDetectionRules();
+      setRules(data);
+    } catch (err) {
+      setError(
+        err instanceof Error ? err.message : "Unable to load detection rules.",
+      );
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      void loadRules();
+    }, 0);
+
+    return () => clearTimeout(timeoutId);
+  }, [loadRules]);
 
   return (
     <div className="mx-auto w-full max-w-[1440px] space-y-6">
@@ -42,14 +50,31 @@ export function DetectionRules() {
         <h2 className="text-lg font-medium text-[#EDEFFF]">Rules in use</h2>
 
         <p className="mt-3 text-sm text-[#A8ADB8]">
-          Configuration v1.4 · Changes apply to future analyses.
+          Configuration v{" "}
+          {rules.length ? Math.max(...rules.map((rule) => rule.version)) : "—"}{" "}
+          · Changes apply to future analyses.
         </p>
 
         <div className="mt-4">
-          <RulesTable
-            rules={initialRules}
-            onConfigure={() => router.push("/admin/detection-rules/configure")}
-          />
+          {loading ? (
+            <p className="py-8 text-sm text-[#A8ADB8]">Loading rules…</p>
+          ) : error ? (
+            <p role="alert" className="py-8 text-sm text-red-400">
+              {error}
+            </p>
+          ) : (
+            <RulesTable
+              rules={rules}
+              onConfigure={(rule) =>
+                router.push(
+                  `/admin/detection-rules/configure?ruleKey=${encodeURIComponent(
+                    rule.ruleKey,
+                  )}`,
+                )
+              }
+              onStatusChanged={loadRules}
+            />
+          )}
         </div>
       </section>
 

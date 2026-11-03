@@ -1,8 +1,8 @@
-import type { WorkspaceUser } from "./user-types";
+import type { WorkspaceMember } from "@/lib/api/users";
 
 type UsersTableProps = {
-  users: WorkspaceUser[];
-  onManage: (user: WorkspaceUser) => void;
+  users: WorkspaceMember[];
+  onManage: (user: WorkspaceMember) => void;
 };
 
 export function UsersTable({ users, onManage }: UsersTableProps) {
@@ -28,10 +28,7 @@ export function UsersTable({ users, onManage }: UsersTableProps) {
           {users.map((user) => (
             <tr key={user.id} className="text-sm text-[#EDEFFF]">
               <td className="px-3 py-4">
-                <p>
-                  {user.name}
-                  {user.owner ? " · Owner" : ""}
-                </p>
+                <p>{user.fullName}</p>
                 <p className="mt-1 text-xs text-[#A8ADB8]">{user.email}</p>
               </td>
 
@@ -40,16 +37,20 @@ export function UsersTable({ users, onManage }: UsersTableProps) {
               <td className="px-3 py-4">
                 <span
                   className={`rounded-full border px-3 py-1 text-xs ${
-                    user.status === "Active"
+                    user.status === "ACTIVE"
                       ? "border-[#34E89A]/30 bg-[#34E89A]/10 text-[#34E89A]"
                       : "border-gray-500/30 bg-gray-500/10 text-gray-400"
                   }`}
                 >
-                  {user.status}
+                  {user.status === "ACTIVE" ? "Active" : "Deactivated"}
                 </span>
               </td>
 
-              <td className="px-3 py-4 text-[#B7B9CB]">{user.lastActive}</td>
+              <td className="px-3 py-4 text-[#B7B9CB]">
+                {user.lastActive
+                  ? new Date(user.lastActive).toLocaleString()
+                  : "Never"}
+              </td>
 
               <td className="px-3 py-4">
                 <button

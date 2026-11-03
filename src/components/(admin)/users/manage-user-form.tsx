@@ -8,6 +8,7 @@ type Props = {
   onSave: (user: WorkspaceUser) => void;
   onDeactivate: (user: WorkspaceUser) => void;
   onCancel: () => void;
+  saving?: boolean;
 };
 
 export function ManageUserForm({
@@ -15,6 +16,7 @@ export function ManageUserForm({
   onSave,
   onDeactivate,
   onCancel,
+  saving = false,
 }: Props) {
   const [role, setRole] = useState(user.role);
   const [status, setStatus] = useState(user.status);
@@ -82,14 +84,15 @@ export function ManageUserForm({
         <div className="mt-4 flex flex-wrap gap-3">
           <button
             type="button"
+            disabled={saving}
             onClick={() => onSave({ ...user, role, status })}
-            className="min-h-12 rounded-lg bg-[#34E89A] px-5 text-sm font-medium text-black hover:bg-[#90EFC5]"
+            className="min-h-12 rounded-lg bg-[#34E89A] px-5 text-sm font-medium text-black hover:bg-[#90EFC5] disabled:opacity-50"
           >
-            Save user access
+            {saving ? "Saving..." : "Save user access"}
           </button>
           <button
             type="button"
-            disabled={user.owner || status === "Inactive"}
+            disabled={user.owner || status === "Inactive" || saving}
             onClick={() => onDeactivate(user)}
             className="min-h-12 rounded-lg border border-[#393943] px-5 text-sm text-white hover:bg-[#292930] disabled:opacity-40"
           >

@@ -105,3 +105,90 @@ export async function approveAnalyst(
 
   return response.json();
 }
+
+export type WorkspaceMember = {
+  id: string;
+  fullName: string;
+  email: string;
+  role: "ADMIN" | "ANALYST";
+  status: "ACTIVE" | "DEACTIVATED";
+  lastActive: string | null;
+  createdAt: string;
+};
+
+export type WorkspaceMembersResponse = {
+  data: WorkspaceMember[];
+  total: number;
+  page: number;
+  limit: number;
+  totalPages: number;
+  hasNextPage: boolean;
+  hasPreviousPage: boolean;
+};
+
+export async function getWorkspaceMembers(
+  page = 1,
+  limit = 20,
+): Promise<WorkspaceMembersResponse> {
+  const params = new URLSearchParams({
+    page: String(page),
+    limit: String(limit),
+  });
+
+  const response = await authenticatedFetch(`/users?${params}`, {
+    method: "GET",
+  });
+
+  if (!response.ok) {
+    await readError(response, "Unable to load workspace members.");
+  }
+
+  return response.json();
+}
+export async function getAllWorkspaceMembers(): Promise<WorkspaceMember[]> {
+  const firstPage = await getWorkspaceMembers(1, 100);
+  const members = [...firstPage.data];
+
+  for (let page = 2; page <= firstPage.totalPages; page++) {
+    const response = await getWorkspaceMembers(page, 100);
+    members.push(...response.data);
+  }
+
+  return members;
+}
+export type WorkspaceMemberStatus = "ACTIVE" | "DEACTIVATED";
+
+export async function updateMemberStatus(
+  id: string,
+  status: WorkspaceMemberStatus,
+): Promise<WorkspaceMember> {
+  const response = await authenticatedFetch(
+    `/users/${encodeURIComponent(id)}/status`,
+    {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ status }),
+    },
+  );
+
+  if (!response.ok) {
+    await readError(response, "Unable to update this member's status.");
+  }
+
+  return response.json();
+}
+
+export async function deactivateMember(
+  id: string,
+): Promise<{ message: string; account: WorkspaceMember }> {
+  const response = await authenticatedFetch(
+    `/users/${encodeURIComponent(id)}/deactivate`,
+    { method: "POST" },
+  );
+
+  if (!response.ok) {
+    await readError(response, "Unable to deactivate this member.");
+  }
+
+  return response.json();
+}
