@@ -3,13 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
-import {
-  activateDetectionRule,
-  deactivateDetectionRule,
-  getDetectionRule,
-  updateDetectionRule,
-  type DetectionRule,
-} from "@/lib/api/rules";
+import { getDetectionRule, type DetectionRule } from "@/lib/api/rules";
 
 // type ParamValue = string | number;
 
@@ -75,9 +69,6 @@ export function ConfigureDetectionRules() {
     };
   }, [ruleKey]);
 
-  // function updateParam(key: string, value: ParamValue) {
-  //   setParams((current) => ({ ...current, [key]: value }));
-  // }
   function updateParam(key: string, value: string) {
     setParams((current) => ({ ...current, [key]: value }));
   }
@@ -94,23 +85,6 @@ export function ConfigureDetectionRules() {
       return;
     }
 
-    // const parsedParams: Record<string, unknown> = {};
-
-    // for (const key of rule.allowedParams) {
-    //   const value = params[key];
-
-    //   if (value === undefined || value === "") {
-    //     setError(`${key} is required.`);
-    //     return;
-    //   }
-
-    //   if (typeof value === "number" && !Number.isFinite(value)) {
-    //     setError(`${key} must be a valid number.`);
-    //     return;
-    //   }
-
-    //   parsedParams[key] = value;
-    // }
     const parsedParams: Record<string, unknown> = {};
 
     for (const key of rule.allowedParams) {
@@ -140,25 +114,23 @@ export function ConfigureDetectionRules() {
     setError("");
 
     try {
-      await updateDetectionRule(ruleKey, {
-        version: rule.version,
-        name: rule.name,
-        params: parsedParams,
-        weight: parsedWeight,
-      });
+      sessionStorage.setItem(
+        "provera-detection-rule-draft",
+        JSON.stringify({
+          ruleKey,
+          version: rule.version,
+          name: rule.name,
+          params: parsedParams,
+          weight: parsedWeight,
+          originalIsActive: rule.isActive,
+          isActive,
+        }),
+      );
 
-      if (isActive !== rule.isActive) {
-        if (isActive) {
-          await activateDetectionRule(ruleKey);
-        } else {
-          await deactivateDetectionRule(ruleKey);
-        }
-      }
-
-      router.push("/admin/detection-rules");
+      router.push("/admin/detection-rules/review");
     } catch (err) {
       setError(
-        err instanceof Error ? err.message : "Unable to save rule changes.",
+        err instanceof Error ? err.message : "Unable to prepare rule changes.",
       );
     } finally {
       setSaving(false);

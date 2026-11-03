@@ -87,7 +87,6 @@ export async function getPendingAnalysts(): Promise<PendingAnalyst[]> {
 
   const data = await response.json();
 
-  // Supports either a direct array or a { data: [...] } response.
   return Array.isArray(data) ? data : data.data;
 }
 
@@ -191,4 +190,17 @@ export async function deactivateMember(
   }
 
   return response.json();
+}
+
+export async function getWorkspaceMemberById(
+  id: string,
+): Promise<WorkspaceMember> {
+  const members = await getAllWorkspaceMembers();
+  const member = members.find((item) => item.id === id);
+
+  if (!member) {
+    throw new Error("Workspace member not found.");
+  }
+
+  return member;
 }

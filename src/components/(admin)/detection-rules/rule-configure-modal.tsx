@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import type { DetectionRule } from "./rules-table";
+import type { DetectionRule } from "@/lib/api/rules";
 
 type Props = {
   rule: DetectionRule | null;
@@ -14,7 +14,7 @@ export function RuleConfigureModal({ rule, onClose, onSave }: Props) {
 
   return (
     <RuleConfigureForm
-      key={rule.id}
+      key={rule.ruleKey}
       rule={rule}
       onClose={onClose}
       onSave={onSave}
@@ -32,17 +32,43 @@ function RuleConfigureForm({
   onSave: (rule: DetectionRule) => void;
 }) {
   const [name, setName] = useState(rule.name);
-  const [condition, setCondition] = useState(rule.condition);
-  const [enabled, setEnabled] = useState(rule.enabled);
+  const [weight, setWeight] = useState(String(rule.weight));
+  const [params, setParams] = useState(JSON.stringify(rule.params, null, 2));
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
+    let parsedParams: Record<string, unknown>;
+
+    try {
+      const parsed: unknown = JSON.parse(params);
+
+      if (
+        parsed === null ||
+        typeof parsed !== "object" ||
+        Array.isArray(parsed)
+      ) {
+        throw new Error("Params must be a JSON object.");
+      }
+
+      parsedParams = parsed as Record<string, unknown>;
+    } catch {
+      alert("Enter valid JSON for params, using a JSON object.");
+      return;
+    }
+
+    const parsedWeight = Number(weight);
+
+    if (!Number.isFinite(parsedWeight)) {
+      alert("Weight must be a valid number.");
+      return;
+    }
+
     onSave({
       ...rule,
       name: name.trim(),
-      condition: condition.trim(),
-      enabled,
+      weight: parsedWeight,
+      params: parsedParams,
     });
   }
 
@@ -66,10 +92,6 @@ function RuleConfigureForm({
           Configure detection rule
         </h2>
 
-        <p className="mt-2 text-sm text-[#A8ADB8]">
-          Changes apply to this page only until backend integration is added.
-        </p>
-
         <form onSubmit={handleSubmit} className="mt-6 space-y-5">
           <div>
             <label
@@ -89,29 +111,38 @@ function RuleConfigureForm({
 
           <div>
             <label
-              htmlFor="rule-condition"
+              htmlFor="rule-weight"
               className="mb-2 block text-sm text-[#EDEFFF]"
             >
-              Condition
+              Weight
             </label>
             <input
-              id="rule-condition"
-              value={condition}
-              onChange={(event) => setCondition(event.target.value)}
+              id="rule-weight"
+              type="number"
+              value={weight}
+              onChange={(event) => setWeight(event.target.value)}
               required
               className="w-full rounded-lg border border-[#393943] bg-[#0B0B0D] px-4 py-3 text-sm text-white outline-none focus:border-[#34E89A]"
             />
           </div>
 
-          <label className="flex items-center gap-3 text-sm text-[#EDEFFF]">
-            <input
-              type="checkbox"
-              checked={enabled}
-              onChange={(event) => setEnabled(event.target.checked)}
-              className="h-4 w-4 accent-[#34E89A]"
+          <div>
+            <label
+              htmlFor="rule-params"
+              className="mb-2 block text-sm text-[#EDEFFF]"
+            >
+              Params (JSON)
+            </label>
+            <textarea
+              id="rule-params"
+              value={params}
+              onChange={(event) => setParams(event.target.value)}
+              required
+              rows={7}
+              spellCheck={false}
+              className="w-full rounded-lg border border-[#393943] bg-[#0B0B0D] px-4 py-3 font-mono text-sm text-white outline-none focus:border-[#34E89A]"
             />
-            Enable this rule
-          </label>
+          </div>
 
           <div className="flex justify-end gap-3">
             <button

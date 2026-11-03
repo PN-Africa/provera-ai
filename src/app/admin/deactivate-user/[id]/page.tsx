@@ -1,17 +1,39 @@
 import { notFound } from "next/navigation";
-
-import { initialUsers } from "@/components/(admin)/users/user-types";
+import { getWorkspaceMemberById } from "@/lib/api/users";
 import { DeactivateUserPage } from "@/components/(admin)/users/deactivate-user-page";
 
-export default async function Page({
-  params,
-}: {
+type PageProps = {
   params: Promise<{ id: string }>;
-}) {
+};
+
+export default async function Page({ params }: PageProps) {
   const { id } = await params;
-  const user = initialUsers.find((member) => member.id === id);
 
-  if (!user) notFound();
+  let user;
 
-  return <DeactivateUserPage user={user} />;
+  try {
+    user = await getWorkspaceMemberById(id);
+  } catch (error) {
+    if (
+      error instanceof Error &&
+      error.message === "Workspace member not found."
+    ) {
+      notFound();
+    }
+
+    throw error;
+  }
+
+  return (
+    <DeactivateUserPage
+      user={{
+        id: user.id,
+        name: user.fullName,
+        email: user.email,
+        role: user.role === "ADMIN" ? "Administrator" : "Analyst",
+        status: user.status === "ACTIVE" ? "Active" : "Inactive",
+        lastActive: user.lastActive,
+      }}
+    />
+  );
 }
