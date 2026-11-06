@@ -3,7 +3,13 @@ import { apiClient } from "./client";
 export type RiskLevel = "LOW" | "MEDIUM" | "HIGH";
 
 export type ReviewStatus = "OPEN" | "IN_REVIEW" | "APPROVED" | "REJECTED";
-
+export interface TransactionIndicator {
+  ruleName: string;
+  reason: string;
+  details?: Record<string, unknown>;
+  ruleKey?: string;
+  weight?: number;
+}
 export interface Transaction {
   id: string;
   transactionId: string;
@@ -20,6 +26,7 @@ export interface Transaction {
   flagged: boolean;
   reviewStatus: ReviewStatus | null;
   review?: unknown;
+  indicators?: TransactionIndicator[];
 }
 
 export interface TransactionsResponse {

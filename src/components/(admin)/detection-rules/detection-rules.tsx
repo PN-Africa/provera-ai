@@ -67,7 +67,7 @@ export function DetectionRules() {
               rules={rules}
               onConfigure={(rule) =>
                 router.push(
-                  `/admin/detection-rules/configure?ruleKey=${encodeURIComponent(
+                  `/workspace/detection-rules/configure?ruleKey=${encodeURIComponent(
                     rule.ruleKey,
                   )}`,
                 )
@@ -78,7 +78,7 @@ export function DetectionRules() {
         </div>
       </section>
 
-      <section className="rounded-xl border border-[#393943] bg-[#202027] p-5 sm:p-6">
+      {/* <section className="rounded-xl border border-[#393943] bg-[#202027] p-5 sm:p-6">
         <h2 className="text-lg font-medium text-[#EDEFFF]">
           How rules affect risk
         </h2>
@@ -100,7 +100,7 @@ export function DetectionRules() {
         >
           Manage risk thresholds
         </button>
-      </section>
+      </section> */}
     </div>
   );
 }

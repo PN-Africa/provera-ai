@@ -127,7 +127,7 @@ export function ConfigureDetectionRules() {
         }),
       );
 
-      router.push("/admin/detection-rules/review");
+      router.push("/workspace/detection-rules/review");
     } catch (err) {
       setError(
         err instanceof Error ? err.message : "Unable to prepare rule changes.",
@@ -152,7 +152,7 @@ export function ConfigureDetectionRules() {
         </p>
         <button
           type="button"
-          onClick={() => router.push("/admin/detection-rules")}
+          onClick={() => router.push("/workspace/detection-rules")}
           className="text-sm text-[#34E89A] hover:text-[#90EFC5]"
         >
           Back to detection rules
@@ -261,7 +261,7 @@ export function ConfigureDetectionRules() {
           <div className="flex flex-wrap gap-3">
             <button
               type="button"
-              onClick={() => router.push("/admin/detection-rules")}
+              onClick={() => router.push("/workspace/detection-rules")}
               disabled={saving}
               className="min-h-12 rounded-lg border border-[#393943] px-5 text-sm text-[#EDEFFF] transition hover:bg-[#292930] disabled:opacity-50"
             >

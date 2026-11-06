@@ -60,7 +60,7 @@ export function ReviewDetectionRules() {
       }
 
       sessionStorage.removeItem("provera-detection-rule-draft");
-      router.push("/admin/detection-rules");
+      router.push("/workspace/detection-rules");
     } catch (err) {
       setError(
         err instanceof Error ? err.message : "Unable to apply rule changes.",
@@ -81,7 +81,7 @@ export function ReviewDetectionRules() {
         </p>
         <button
           type="button"
-          onClick={() => router.replace("/admin/detection-rules/configure")}
+          onClick={() => router.replace("/workspace/detection-rules/configure")}
           className="mt-5 min-h-12 rounded-lg bg-[#34E89A] px-5 text-sm font-medium text-black hover:bg-[#90EFC5]"
         >
           Configure rules

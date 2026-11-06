@@ -1,28 +1,21 @@
-import Link from "next/link";
-
 interface TransactionDetailHeaderProps {
   transactionId: string;
   date: string;
-  portal?: "client" | "admin";
+  onBack: () => void;
 }
 
 export function TransactionDetailHeader({
   transactionId,
   date,
-  portal = "client",
+  onBack,
 }: TransactionDetailHeaderProps) {
-  const flaggedTransactionsPath =
-    portal === "admin"
-      ? "/admin/workspace/flagged-transactions"
-      : "/workspace/flagged-transactions";
-
   return (
     <div>
       <p className="font-sans text-[12px] font-medium uppercase leading-[18px] text-[#B7B9CB]">
         Transaction Intelligence
       </p>
 
-      <h1 className="mt-2 font-manrope text-[40px] font-bold leading-[48px] tracking-[-0.4px] text-[#EDEFFF]">
+      <h1 className="mt-2 break-words font-manrope text-[28px] font-bold leading-[36px] tracking-[-0.4px] text-[#EDEFFF] sm:text-[40px] sm:leading-[48px]">
         {transactionId}
       </h1>
 
@@ -30,12 +23,13 @@ export function TransactionDetailHeader({
         Transfer · {date}
       </p>
 
-      <Link
-        href={flaggedTransactionsPath}
+      <button
+        type="button"
+        onClick={onBack}
         className="mt-6 flex h-[46px] w-[220px] items-center justify-center rounded-[6px] border border-[#343644] bg-[#34E89A] font-sans text-[14px] font-medium leading-[20px] text-[#0B0C0E] transition hover:bg-[#90EFC5]"
       >
-        Back to flagged
-      </Link>
+        Back
+      </button>
     </div>
   );
 }

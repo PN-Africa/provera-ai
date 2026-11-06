@@ -48,7 +48,8 @@ function toTableTransaction(transaction: ApiTransaction): Transaction {
   } as const;
 
   return {
-    id: transaction.id,
+    id: transaction.id, // UUID: keep for navigation
+    transactionId: transaction.transactionId, // readable ID: display in table
     amount: `${transaction.currency} ${Number(transaction.amount).toLocaleString()}`,
     risk: riskLabels[transaction.riskLevel],
     date: new Date(transaction.occurredAt).toLocaleString(),

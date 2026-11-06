@@ -10,9 +10,13 @@ export default function AttentionTable({
   transactions,
   portal = "client",
 }: AttentionTableProps) {
-  const flaggedTransactions = transactions.filter(
-    (transaction) => transaction.flagged,
-  );
+  const flaggedTransactions = transactions
+    .filter((transaction) => transaction.flagged)
+    .sort(
+      (a, b) =>
+        new Date(b.occurredAt).getTime() - new Date(a.occurredAt).getTime(),
+    )
+    .slice(0, 4);
 
   const transactionPath =
     portal === "admin"
@@ -125,12 +129,14 @@ export default function AttentionTable({
         </div>
       </div>
 
-      <Link
-        href={flaggedPath}
-        className="mt-6 flex h-[44px] w-[195px] items-center justify-center rounded-lg border border-[#343644] bg-[#34E89A] px-4 font-sans text-[14px] font-medium leading-[20px] text-[#0B0C0E] transition hover:bg-[#90EFC5]"
-      >
-        View all flagged
-      </Link>
+      {flaggedTransactions.length > 0 && (
+        <Link
+          href={flaggedPath}
+          className="mt-6 flex h-[44px] w-[195px] items-center justify-center rounded-lg border border-[#343644] bg-[#34E89A] px-4 font-sans text-[14px] font-medium leading-[20px] text-[#0B0C0E] transition hover:bg-[#90EFC5]"
+        >
+          View all flagged
+        </Link>
+      )}
     </div>
   );
 }

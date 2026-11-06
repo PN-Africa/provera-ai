@@ -10,6 +10,10 @@ const navigation = [
     href: "/workspace/overview",
   },
   {
+    label: "Transaction data",
+    href: "/workspace/transaction-data",
+  },
+  {
     label: "All transactions",
     href: "/workspace/transactions",
   },
@@ -17,18 +21,23 @@ const navigation = [
     label: "Flagged transactions",
     href: "/workspace/flagged-transactions",
   },
+
   {
-    label: "Transaction data",
-    href: "/workspace/transaction-data",
+    label: "Rejected transactions",
+    href: "/workspace/rejected-transactions",
   },
+  // {
+  //   label: "Users & access",
+  //   href: "/workspace/users",
+  // },
   {
-    label: "Users & access",
-    href: "/workspace/users",
+    label: "Detection Configuration",
+    href: "/workspace/detection-rules",
   },
-  {
-    label: "Detection configuration",
-    href: "/workspace/detection-configuration",
-  },
+  // {
+  //   label: "Detection configuration",
+  //   href: "/workspace/detection-configuration",
+  // },
   {
     label: "Platform activity",
     href: "/workspace/platform-activity",

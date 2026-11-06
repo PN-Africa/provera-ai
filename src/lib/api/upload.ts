@@ -60,25 +60,39 @@ export interface TransactionUpload {
   updatedAt?: string;
 }
 
+// export interface UploadListResponse {
+//   uploads: TransactionUpload[];
+//   total?: number;
+//   page?: number;
+//   limit?: number;
+// }
+
 export interface UploadListResponse {
-  uploads: TransactionUpload[];
-  total?: number;
-  page?: number;
-  limit?: number;
+  data: TransactionUpload[];
+  total: number;
+  page: number;
+  limit: number;
+  totalPages: number;
 }
 
 export interface RejectedUploadRow {
+  id: string;
+  createdAt: string;
+  updatedAt: string;
+  uploadId: string;
   rowNumber: number;
-  transactionId?: string;
+  transactionId: string | null;
   reasons: string[];
 }
 
 export interface RejectedRowsResponse {
-  rows?: RejectedUploadRow[];
-  rejectedRows?: RejectedUploadRow[];
-  total?: number;
-  page?: number;
-  limit?: number;
+  data: RejectedUploadRow[];
+  total: number;
+  page: number;
+  limit: number;
+  totalPages: number;
+  hasNextPage: boolean;
+  hasPreviousPage: boolean;
 }
 
 export interface ScoreUploadsResponse {
@@ -109,7 +123,6 @@ export async function uploadTransactions(file: File): Promise<UploadResponse> {
   return readResponse<UploadResponse>(response);
 }
 
-// Get all uploads
 export async function getUploads(
   page = 1,
   limit = 20,
@@ -125,6 +138,43 @@ export async function getUploads(
 
   return readResponse<UploadListResponse>(response);
 }
+
+// Get all uploads
+// export async function getUploads(
+//   page = 1,
+//   limit = 20,
+// ): Promise<UploadListResponse> {
+//   const response = await fetch(
+//     `${getApiUrl()}/uploads?page=${page}&limit=${limit}`,
+//     {
+//       method: "GET",
+//       credentials: "include",
+//       cache: "no-store",
+//     },
+//   );
+
+//   return readResponse<UploadListResponse>(response);
+// }
+
+// export async function getUploads(
+//   page = 1,
+//   limit = 20,
+// ): Promise<UploadListResponse> {
+//   const response = await fetch(
+//     `${getApiUrl()}/uploads?page=${page}&limit=${limit}`,
+//     {
+//       method: "GET",
+//       credentials: "include",
+//       cache: "no-store",
+//     },
+//   );
+
+//   const data = await readResponse<unknown>(response);
+
+//   console.log("GET UPLOADS API RESPONSE:", data);
+
+//   return data as UploadListResponse;
+// }
 
 // Get a specific upload
 export async function getUpload(id: string): Promise<TransactionUpload> {

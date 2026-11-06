@@ -9,10 +9,6 @@ export default function OverviewStats({
   transactions,
   totalTransactions,
 }: OverviewStatsProps) {
-  // const flaggedCount = transactions.filter(
-  //   (transaction) => transaction.flagged,
-  // ).length;
-
   const highRiskCount = transactions.filter(
     (transaction) => transaction.riskLevel === "HIGH",
   ).length;

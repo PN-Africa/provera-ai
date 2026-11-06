@@ -6,12 +6,12 @@ import { RiskBadge } from "./risk-badge";
 
 export type Transaction = {
   id: string;
+  transactionId: string;
   amount: string;
   risk: "High risk" | "Medium risk" | "Low risk";
   date: string;
   indicator: string;
 };
-
 interface TransactionTableProps {
   transactions: Transaction[];
   portal?: "client" | "admin";
@@ -61,6 +61,11 @@ export function TransactionTable({
 
           <tbody>
             {paginatedTransactions.map((transaction) => {
+              console.log("Transaction row:", transaction);
+              // const detailsPath =
+              //   portal === "admin"
+              //     ? `/admin/workspace/transactions/${encodeURIComponent(transaction.id)}`
+              //     : `/workspace/transactions/${encodeURIComponent(transaction.id)}`;
               const detailsPath =
                 portal === "admin"
                   ? `/admin/workspace/transactions/${encodeURIComponent(transaction.id)}`
@@ -76,10 +81,9 @@ export function TransactionTable({
                       href={detailsPath}
                       className="text-[14px] text-[#EDEFFF] underline-offset-4 hover:underline"
                     >
-                      {transaction.id}
+                      {transaction.transactionId}
                     </Link>
                   </td>
-
                   <td className="px-5 text-[14px] text-[#EDEFFF]">
                     {transaction.amount}
                   </td>

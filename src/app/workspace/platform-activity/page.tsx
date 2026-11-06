@@ -1,12 +1,18 @@
-import { ActivityList } from "@/components/(dashboard)/platform-activity/activity-list";
-import { PlatformActivityHeader } from "@/components/(dashboard)/platform-activity/platform-activity-header";
+// import { ActivityList } from "@/components/(dashboard)/platform-activity/activity-list";
+// import { PlatformActivityHeader } from "@/components/(dashboard)/platform-activity/platform-activity-header";
+
+// export default function PlatformActivityPage() {
+//   return (
+//     <div className="min-h-screen bg-black text-[#EDEFFF] ">
+//       <PlatformActivityHeader />
+
+//       <ActivityList />
+//     </div>
+//   );
+// }
+
+import { PlatformActivity } from "@/components/(admin)/activity/platform-activity";
 
 export default function PlatformActivityPage() {
-  return (
-    <div className="min-h-screen bg-black text-[#EDEFFF] ">
-      <PlatformActivityHeader />
-
-      <ActivityList />
-    </div>
-  );
+  return <PlatformActivity />;
 }

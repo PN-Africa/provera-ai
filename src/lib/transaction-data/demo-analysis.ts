@@ -32,7 +32,7 @@ export function analyzeRecords(records: CsvRecord[]): Transaction[] {
     }
   });
 
-  return records.map((record) => {
+  return records.map((record, index) => {
     const repeatedCustomer =
       Boolean(record.customer_id) &&
       (customerCounts.get(record.customer_id) ?? 0) >= 3;
@@ -49,8 +49,9 @@ export function analyzeRecords(records: CsvRecord[]): Transaction[] {
     }
 
     return {
-      id: record.transactionId,
-      amount: `${record.currency} ${record.amount.toLocaleString("en-NG")}`,
+      id: record.transactionId || `demo-${index + 1}`,
+      transactionId: record.transactionId || `DEMO-${index + 1}`,
+      amount: `${record.currency} ${Number(record.amount).toLocaleString()}`,
       risk,
       date: formatDate(record.timestamp),
       indicator,

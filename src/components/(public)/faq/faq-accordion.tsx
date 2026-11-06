@@ -10,7 +10,7 @@ export function FAQAccordion({ items }: FAQAccordionProps) {
       {items.map((item) => (
         <details
           key={item.question}
-          className="group rounded-[5px] border border-[#373849] bg-[#1C1D27] px-4 py-4 sm:px-[17px] sm:py-[17px]"
+          className="group rounded-[5px] border border-[#3A3A43] bg-[#202026] px-4 py-4 sm:px-[17px] sm:py-[17px]"
         >
           <summary className="flex cursor-pointer font-manrope list-none items-center justify-between gap-4 text-[20px] sm:text-[14px] font-semibold leading-[28px] tracking-[0px] text-[#EDEFFF] [&::-webkit-details-marker]:hidden">
             <span>{item.question}</span>

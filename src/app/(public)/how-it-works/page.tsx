@@ -67,12 +67,12 @@ export default function HowItWorksPage() {
           transactions need a closer look.
         </p>
 
-        <Link
+        {/* <Link
           href="/signup"
           className="mt-6 inline-flex min-h-[48px] w-full max-w-[224px] items-center justify-center rounded-[6px] bg-[#34E89A] px-6 font-sans text-[14px] font-medium leading-[20px] text-[#0B0C0E] transition-colors hover:bg-[#90EFC5] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#90EFC5] focus-visible:ring-offset-2 focus-visible:ring-offset-black "
         >
           Create your account
-        </Link>
+        </Link> */}
       </section>
 
       {/* Before you begin */}

@@ -34,9 +34,11 @@ export function TransactionsPageContent({
     };
 
     const result = transactions.filter((transaction) => {
-      const matchesSearch = String(transaction.id)
-        .toLowerCase()
-        .includes(query);
+      const matchesSearch =
+        String(transaction.transactionId ?? "")
+          .toLowerCase()
+          .includes(query) ||
+        String(transaction.id).toLowerCase().includes(query);
 
       const matchesRisk =
         riskFilter === "All" || transaction.risk === riskFilter;

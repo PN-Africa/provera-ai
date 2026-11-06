@@ -6,7 +6,7 @@ import { PublicHeader } from "@/components/(public)/layout/public-header";
 
 export default function FAQPage() {
   return (
-    <main className="min-h-screen bg-black font-[family-name:var(--font-dm-sans)] text-[#EDEFFF]">
+    <main className="min-h-screen font-[family-name:var(--font-dm-sans)] text-[#EDEFFF]">
       {/* Public navigation */}
       <PublicHeader />
 
@@ -33,10 +33,10 @@ export default function FAQPage() {
         </div>
 
         {/* FAQ sections */}
-        <div className="mt-9 space-y-9">
+        <div className="mt-9 space-y-9 ">
           {faqCategories.map((category) => (
             <section key={category.id} id={category.id} className="scroll-mt-8">
-              <h2 className="mb-2 font-manrope text-[20px] sm:text[15px] font-semibold leading-[28px] tracking-[0px]">
+              <h2 className="mb-2 font-manrope text-[20px] sm:text[15px] font-semibold leading-[28px] tracking-[0px] ">
                 {category.title}
               </h2>
 
@@ -69,7 +69,7 @@ export default function FAQPage() {
         <footer className="mt-8">
           <Link
             href="/"
-            className="text-[14px] sm:text-[10px] font-medium text-[#EDEFFF]  leading-[20px] tracking-[0px] underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5968FF]"
+            className="text-[14px] sm:text-[10px] font-medium text-[#EDEFFF]  leading-[20px] tracking-[0px] underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#203B30]"
           >
             Back to home
           </Link>
