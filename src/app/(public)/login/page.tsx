@@ -166,12 +166,12 @@ export default function LoginPage() {
               New to Provera AI? Sign up
             </Link>
 
-            <p className="font-sans text-[14px] leading-[20px] text-[#EDEFFF]">
+            {/* <p className="font-sans text-[14px] leading-[20px] text-[#EDEFFF]">
               Need workspace access?{" "}
               <Link href="/request-access" className="hover:underline">
                 Request access
               </Link>
-            </p>
+            </p> */}
           </div>
         </AuthCard>
       </div>

@@ -70,3 +70,40 @@ export const getTransactionById = async (id: string): Promise<Transaction> => {
 
   return response.data;
 };
+
+export async function downloadCustomerHistory(
+  transactionId: string,
+  from?: string,
+  to?: string,
+): Promise<void> {
+  const response = await apiClient.get(
+    `/transactions/${encodeURIComponent(transactionId)}/customer-history`,
+    {
+      params: {
+        ...(from ? { from } : {}),
+        ...(to ? { to } : {}),
+      },
+      responseType: "blob",
+    },
+  );
+
+  const blob = response.data as Blob;
+
+  const contentDisposition = response.headers["content-disposition"];
+
+  const filename =
+    contentDisposition?.match(/filename="?([^"]+)"?/i)?.[1] ??
+    "customer-transactions.csv";
+
+  const url = window.URL.createObjectURL(blob);
+  const link = document.createElement("a");
+
+  link.href = url;
+  link.download = filename;
+
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+
+  window.URL.revokeObjectURL(url);
+}
