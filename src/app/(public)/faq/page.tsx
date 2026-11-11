@@ -18,7 +18,7 @@ export default function FAQPage() {
           </p>
 
           <h1 className="mt-3 font-manrope  text-[40px] font-bold leading-[48px] tracking-[-0.4px] sm:text-[32px] text-[#EDEFFF]">
-            Frequently asked questions
+            Frequently Asked Questions
           </h1>
 
           <p className="mt-3 text-[18px] sm:text-[13px] font-normal leading-[28px] tracking-[0px] font-sans text-[#B7B9CB]">
@@ -46,7 +46,7 @@ export default function FAQPage() {
         </div>
 
         {/* Request access callout */}
-        <section className="mt-8 flex flex-col gap-5 rounded-[8px] border border-[#202236] bg-[#232329] px-5 py-6 sm:flex-row sm:items-center sm:justify-between sm:px-6">
+        {/* <section className="mt-8 flex flex-col gap-5 rounded-[8px] border border-[#202236] bg-[#232329] px-5 py-6 sm:flex-row sm:items-center sm:justify-between sm:px-6">
           <div>
             <h2 className="font-manrope text-[20px] sm:text-[14px] font-semibold leading-[28px] tracking-[0px] text-[#EDEFFF]">
               Need help joining your team?
@@ -63,7 +63,7 @@ export default function FAQPage() {
           >
             Request access
           </Link>
-        </section>
+        </section> */}
 
         {/* Back to home */}
         <footer className="mt-8">

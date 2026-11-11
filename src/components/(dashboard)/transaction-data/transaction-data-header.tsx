@@ -10,7 +10,7 @@ export function TransactionDataHeader() {
       </h1>
 
       <p className="mt-2 font-sans text-[16px] font-normal leading-[24px] tracking-[0px] text-[#B7B9CB]">
-        Bring in a dataset. Validate it. Find the signals.
+        Upload a dataset. Validate it. Find the signals.
       </p>
     </div>
   );

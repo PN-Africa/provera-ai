@@ -133,9 +133,9 @@ export default function FeaturesPage() {
               Start your next review with clarity.
             </h2>
 
-            <p className="mt-3 font-sans text-[14px] font-normal leading-[24px] tracking-[0px] text-[#B7B9CB] sm:text-[16px] sm:leading-[28px]">
+            {/* <p className="mt-3 font-sans text-[14px] font-normal leading-[24px] tracking-[0px] text-[#B7B9CB] sm:text-[16px] sm:leading-[28px]">
               Create an account and request access to your team workspace.
-            </p>
+            </p> */}
           </div>
 
           <Link

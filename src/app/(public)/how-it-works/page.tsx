@@ -26,7 +26,7 @@ const steps = [
     number: "03",
     title: "Run the analysis",
     description:
-      "Select Analyze transactions and follow the processing status. When analysis completes, open the overview to see the results.",
+      "Select 'Analyze Transactions' to begin processing your uploaded data. Monitor the progress until the analysis is complete, then navigate to the Overview page to view your results.",
     category: "ANALYZE",
     cardTitle: "See the risk summary",
     cardDescription:
@@ -83,9 +83,8 @@ export default function HowItWorksPage() {
           </h2>
 
           <p className="mt-2 font-sans text-[14px] font-normal leading-[24px] tracking-[0px] text-[#B7B9CB] sm:text-[16px] sm:leading-[28px]">
-            Create an account and get access to your team workspace. Prepare a
-            transaction CSV, or use the synthetic sample available in the upload
-            screen.
+            Create an account and get access to your team&apos;s workspace.
+            Prepare the transaction CSV.
           </p>
         </div>
       </section>
@@ -143,7 +142,7 @@ export default function HowItWorksPage() {
             </h2>
 
             <p className="mt-3 font-sans text-[14px] font-normal leading-[24px] tracking-[0px] text-[#B7B9CB] sm:text-[16px] sm:leading-[28px]">
-              Create your account and request access to your team workspace.
+              Create your account.
             </p>
           </div>
 

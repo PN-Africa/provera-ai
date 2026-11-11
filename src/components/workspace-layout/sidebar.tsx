@@ -32,7 +32,7 @@ const navigation = [
   // },
   // x
   {
-    label: "Detection Configuration",
+    label: "Detection configuration",
     href: "/workspace/detection-rules",
   },
   // {

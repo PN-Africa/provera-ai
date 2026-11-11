@@ -20,9 +20,9 @@ export const faqCategories: FAQCategory[] = [
           "Provera AI helps your team review transaction data, identify unusual activity, and understand the indicators behind each flag. Review the evidence before making a decision.",
       },
       {
-        question: "Can I try it without uploading my own data?",
+        question: "Can I try it without real data?",
         answer:
-          "Yes. Choose Explore sample data on the landing page to view synthetic transactions and sample results. The sample does not contain real customer activity.",
+          "Yes! You can upload your sample transactions and view analysis results.",
       },
     ],
   },
@@ -63,9 +63,8 @@ export const faqCategories: FAQCategory[] = [
     title: "Account & access",
     items: [
       {
-        question: "How do I create an account and join a workspace?",
-        answer:
-          "Sign up with your work email and a password, then request access to your team workspace. An administrator reviews your request and assigns the appropriate permissions.",
+        question: "How do I create an account ?",
+        answer: "Sign up with your work email and a password.",
       },
       {
         question: "Who manages permissions and detection settings?",
