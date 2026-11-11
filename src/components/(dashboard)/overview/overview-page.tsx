@@ -15,7 +15,6 @@ import TransactionActivity from "./transaction-activity";
 import RiskDistribution from "./risk-distribution";
 import AttentionTable from "./attention-table";
 import { OverviewHeader } from "./overview-header";
-import { DatasetFilters } from "./dataset-filters";
 
 type OverviewPageContentProps = {
   from?: string;
@@ -139,7 +138,7 @@ export default function OverviewPageContent({
   return (
     <div className="space-y-6">
       <OverviewHeader />
-      <DatasetFilters
+      {/* <DatasetFilters
         fromDate={fromDate}
         toDate={toDate}
         onFromDateChange={(value) => {
@@ -147,7 +146,7 @@ export default function OverviewPageContent({
           if (toDate && value > toDate) setToDate("");
         }}
         onToDateChange={setToDate}
-      />
+      /> */}
       <OverviewStats
         transactions={transactions}
         totalTransactions={totalTransactions}

@@ -30,6 +30,7 @@ const navigation = [
   //   label: "Users & access",
   //   href: "/workspace/users",
   // },
+  // x
   {
     label: "Detection Configuration",
     href: "/workspace/detection-rules",

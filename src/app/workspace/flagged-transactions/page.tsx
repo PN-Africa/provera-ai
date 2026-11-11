@@ -31,7 +31,6 @@ export default function FlaggedTransactionsPage() {
         title="Flagged transactions"
         description="Prioritize unusual activity and inspect the evidence."
       />
-
       <TransactionFilters
         search={search}
         onSearchChange={setSearch}
@@ -42,12 +41,10 @@ export default function FlaggedTransactionsPage() {
       />
 
       <TransactionTable transactions={filteredTransactions} />
-
       <p className="mt-6 font-sans text-[12px] font-medium leading-[18px] text-[#B7B9CB]">
         Showing {filteredTransactions.length} of {flaggedTransactions.length}{" "}
         flagged transactions
       </p>
-
       <TransactionDisclaimer />
     </div>
   );
