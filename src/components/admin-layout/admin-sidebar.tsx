@@ -18,25 +18,6 @@ import {
   X,
 } from "lucide-react";
 
-const workspaceNavigation = [
-  {
-    label: "Overview",
-    href: "/admin/workspace/overview",
-  },
-  {
-    label: "All transactions",
-    href: "/admin/workspace/transactions",
-  },
-  {
-    label: "Flagged transactions",
-    href: "/admin/workspace/flagged-transactions",
-  },
-  {
-    label: "Transaction data",
-    href: "/admin/workspace/transaction-data",
-  },
-];
-
 const adminNavigation = [
   {
     label: "Admin Overview",
@@ -76,7 +57,7 @@ export function AdminSidebar() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
 
-  function renderNavigation(items: typeof workspaceNavigation) {
+  function renderNavigation(items: typeof adminNavigation) {
     return items.map((item) => {
       const isActive =
         pathname === item.href ||
@@ -154,10 +135,6 @@ export function AdminSidebar() {
           aria-label="Admin navigation"
           className="mt-3 flex-1 space-y-6 overflow-y-auto"
         >
-          <div className="space-y-1">
-            {renderNavigation(workspaceNavigation)}
-          </div>
-
           <div>
             <p className="mb-2 px-3 text-[11px] font-medium uppercase tracking-wider text-[#777B8B]">
               Administration

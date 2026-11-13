@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import { getWorkspaceMembers, type WorkspaceMember } from "@/lib/api/users";
+import { getWorkspaceMemberById, type WorkspaceMember } from "@/lib/api/users";
 import { ManageUserPage } from "@/components/(admin)/users/manage-user-page";
 import type { WorkspaceUser } from "@/components/(admin)/users/user-types";
 
@@ -28,12 +28,7 @@ export default function Page() {
 
     async function loadMember() {
       try {
-        const response = await getWorkspaceMembers();
-        const member = response.data.find((item) => item.id === id);
-
-        if (!member) {
-          throw new Error("Member not found.");
-        }
+        const member = await getWorkspaceMemberById(id);
 
         if (!cancelled) {
           setUser(toWorkspaceUser(member));

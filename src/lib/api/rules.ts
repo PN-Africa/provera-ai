@@ -67,10 +67,8 @@ export type DetectionRule = {
   name: string;
   type: string;
   params: Record<string, unknown>;
-  // allowedParams: Record<string, unknown>;
   weight: number;
   isActive: boolean;
-  savedBy: string | null;
   savedAt: string;
   allowedParams: string[];
 };

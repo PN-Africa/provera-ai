@@ -23,7 +23,7 @@ export function WorkspaceAuthGuard({ children }: { children: ReactNode }) {
         const role = user.role.toLowerCase();
 
         if (role === "admin" || role === "administrator") {
-          router.replace("/admin/workspace/overview");
+          router.replace("/admin/admin-overview");
           return;
         }
 

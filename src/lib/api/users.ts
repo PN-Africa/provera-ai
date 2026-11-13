@@ -8,20 +8,6 @@ function getApiUrl() {
   return API_URL;
 }
 
-export interface PendingAnalyst {
-  id: string;
-  fullName: string;
-  email: string;
-  createdAt: string;
-}
-
-export interface ApprovedAnalyst {
-  id: string;
-  fullName: string;
-  email: string;
-  role: string;
-}
-
 async function refreshAuthentication(): Promise<boolean> {
   try {
     const response = await fetch(`${getApiUrl()}/auth/refresh`, {
@@ -76,35 +62,7 @@ async function readError(response: Response, fallback: string) {
   throw new Error(data?.message || fallback);
 }
 
-export async function getPendingAnalysts(): Promise<PendingAnalyst[]> {
-  const response = await authenticatedFetch("/users/pending", {
-    method: "GET",
-  });
-
-  if (!response.ok) {
-    await readError(response, "Unable to load pending analysts.");
-  }
-
-  const data = await response.json();
-
-  return Array.isArray(data) ? data : data.data;
-}
-
-export async function approveAnalyst(
-  id: string,
-): Promise<{ message: string; account: ApprovedAnalyst }> {
-  const response = await authenticatedFetch(
-    `/users/${encodeURIComponent(id)}/approve`,
-    { method: "POST" },
-  );
-
-  if (!response.ok) {
-    await readError(response, "Unable to approve this analyst.");
-  }
-
-  return response.json();
-}
-
+// Analyst accounts. Admin accounts are never listed.
 export type WorkspaceMember = {
   id: string;
   fullName: string;
@@ -157,17 +115,15 @@ export async function getAllWorkspaceMembers(): Promise<WorkspaceMember[]> {
 }
 export type WorkspaceMemberStatus = "ACTIVE" | "DEACTIVATED";
 
+// Deactivating signs the analyst out everywhere at once and blocks login
 export async function updateMemberStatus(
   id: string,
   status: WorkspaceMemberStatus,
 ): Promise<WorkspaceMember> {
+  const action = status === "ACTIVE" ? "activate" : "deactivate";
   const response = await authenticatedFetch(
-    `/users/${encodeURIComponent(id)}/status`,
-    {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ status }),
-    },
+    `/users/${encodeURIComponent(id)}/${action}`,
+    { method: "POST" },
   );
 
   if (!response.ok) {
@@ -177,30 +133,25 @@ export async function updateMemberStatus(
   return response.json();
 }
 
-export async function deactivateMember(
-  id: string,
-): Promise<{ message: string; account: WorkspaceMember }> {
-  const response = await authenticatedFetch(
-    `/users/${encodeURIComponent(id)}/deactivate`,
-    { method: "POST" },
-  );
-
-  if (!response.ok) {
-    await readError(response, "Unable to deactivate this member.");
-  }
-
-  return response.json();
+export function deactivateMember(id: string): Promise<WorkspaceMember> {
+  return updateMemberStatus(id, "DEACTIVATED");
 }
 
 export async function getWorkspaceMemberById(
   id: string,
 ): Promise<WorkspaceMember> {
-  const members = await getAllWorkspaceMembers();
-  const member = members.find((item) => item.id === id);
+  const response = await authenticatedFetch(
+    `/users/${encodeURIComponent(id)}`,
+    { method: "GET" },
+  );
 
-  if (!member) {
+  if (response.status === 404) {
     throw new Error("Workspace member not found.");
   }
 
-  return member;
+  if (!response.ok) {
+    await readError(response, "Unable to load this member.");
+  }
+
+  return response.json();
 }

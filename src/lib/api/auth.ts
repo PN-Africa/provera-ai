@@ -40,7 +40,9 @@ async function readResponse<T>(response: Response): Promise<T> {
     }
 
     if (response.status === 403) {
-      throw new Error("Your account is awaiting administrator approval.");
+      throw new Error(
+        "This account has been deactivated. Contact your administrator.",
+      );
     }
 
     if (response.status === 429) {

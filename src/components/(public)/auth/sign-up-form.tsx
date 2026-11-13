@@ -164,8 +164,8 @@ export function SignUpForm() {
       </div>
 
       <p className="text-[14px] leading-[20px] text-[#A7A9B8]">
-        Your account and workspace permissions are managed separately. Your team
-        administrator approves workspace access.
+        You can sign in as soon as your account is created. You only see the
+        transaction data you upload.
       </p>
 
       {apiError && (

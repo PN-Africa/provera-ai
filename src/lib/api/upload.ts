@@ -17,7 +17,9 @@ async function readResponse<T>(response: Response): Promise<T> {
     }
 
     if (response.status === 403) {
-      throw new Error("Only administrators can perform this action.");
+      throw new Error(
+        data?.message || "You do not have permission to perform this action.",
+      );
     }
 
     if (response.status === 409) {
@@ -208,7 +210,7 @@ export type Transaction = {
   riskScore: number;
   riskLevel: "LOW" | "MEDIUM" | "HIGH";
   flagged: boolean;
-  reviewStatus: "OPEN" | "IN_REVIEW" | "CLOSED" | null;
+  reviewStatus: "OPEN" | "CLOSED" | null;
   review: unknown | null;
 };
 
@@ -227,8 +229,7 @@ export type TransactionFilters = {
   limit?: number;
   riskLevel?: "LOW" | "MEDIUM" | "HIGH";
   flagged?: boolean;
-  reviewStatus?: "OPEN" | "IN_REVIEW" | "CLOSED";
-  mine?: boolean;
+  reviewStatus?: "OPEN" | "CLOSED";
   uploadId?: string;
   customerId?: string;
   type?: string;

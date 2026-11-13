@@ -2,7 +2,8 @@ import { apiClient } from "./client";
 
 export type RiskLevel = "LOW" | "MEDIUM" | "HIGH";
 
-export type ReviewStatus = "OPEN" | "IN_REVIEW" | "APPROVED" | "REJECTED";
+// OPEN: flagged and not yet decided. CLOSED: a decision was recorded.
+export type ReviewStatus = "OPEN" | "CLOSED";
 export interface TransactionIndicator {
   ruleName: string;
   reason: string;
@@ -45,7 +46,6 @@ export interface GetTransactionsParams {
   riskLevel?: RiskLevel;
   flagged?: boolean;
   reviewStatus?: ReviewStatus;
-  mine?: boolean;
   uploadId?: string;
   customerId?: string;
   type?: string;

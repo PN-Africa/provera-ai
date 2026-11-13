@@ -42,7 +42,7 @@ export default function LoginPage() {
       const role = user.role.toLowerCase();
 
       if (role === "admin" || role === "administrator") {
-        router.replace("/admin/workspace/overview");
+        router.replace("/admin/admin-overview");
       } else {
         router.replace("/workspace/overview");
       }
