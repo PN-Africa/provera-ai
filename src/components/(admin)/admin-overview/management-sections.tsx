@@ -1,8 +1,8 @@
 import {
   Users,
-  Database,
+  // Database,
   ListChecks,
-  SlidersHorizontal,
+  // SlidersHorizontal,
   Activity,
   Settings,
 } from "lucide-react";
@@ -16,13 +16,14 @@ const sections = [
     href: "/admin/users-and-access",
     icon: Users,
   },
-  {
-    title: "Data sources",
-    description: "Manage the inputs available for transaction analysis.",
-    buttonLabel: "Manage sources",
-    href: "/admin/data-sources",
-    icon: Database,
-  },
+  // Not backed by the API yet
+  // {
+  //   title: "Data sources",
+  //   description: "Manage the inputs available for transaction analysis.",
+  //   buttonLabel: "Manage sources",
+  //   href: "/admin/data-sources",
+  //   icon: Database,
+  // },
   {
     title: "Detection rules",
     description: "Set the indicators used to flag unusual transactions.",
@@ -30,13 +31,14 @@ const sections = [
     href: "/admin/detection-rules",
     icon: ListChecks,
   },
-  {
-    title: "Risk thresholds",
-    description: "Choose how triggered indicators map to risk levels.",
-    buttonLabel: "Adjust thresholds",
-    href: "/admin/risk-thresholds",
-    icon: SlidersHorizontal,
-  },
+  // Not backed by the API yet: risk levels are fixed in the backend
+  // {
+  //   title: "Risk thresholds",
+  //   description: "Choose how triggered indicators map to risk levels.",
+  //   buttonLabel: "Adjust thresholds",
+  //   href: "/admin/risk-thresholds",
+  //   icon: SlidersHorizontal,
+  // },
   {
     title: "Platform activity",
     description: "Review access changes, configuration updates and analyses.",

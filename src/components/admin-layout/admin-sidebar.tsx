@@ -27,18 +27,20 @@ const adminNavigation = [
     label: "Users & access",
     href: "/admin/users-and-access",
   },
-  {
-    label: "Data sources",
-    href: "/admin/data-sources",
-  },
+  // Not backed by the API yet
+  // {
+  //   label: "Data sources",
+  //   href: "/admin/data-sources",
+  // },
   {
     label: "Detection rules",
     href: "/admin/detection-rules",
   },
-  {
-    label: "Risk thresholds",
-    href: "/admin/risk-thresholds",
-  },
+  // Not backed by the API yet: risk levels are fixed in the backend
+  // {
+  //   label: "Risk thresholds",
+  //   href: "/admin/risk-thresholds",
+  // },
   {
     label: "Platform activity",
     href: "/admin/platform-activity",

@@ -86,10 +86,12 @@ export type WorkspaceMembersResponse = {
 export async function getWorkspaceMembers(
   page = 1,
   limit = 20,
+  status?: WorkspaceMemberStatus,
 ): Promise<WorkspaceMembersResponse> {
   const params = new URLSearchParams({
     page: String(page),
     limit: String(limit),
+    ...(status ? { status } : {}),
   });
 
   const response = await authenticatedFetch(`/users?${params}`, {

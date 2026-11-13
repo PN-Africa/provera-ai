@@ -29,22 +29,36 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import {
-  getWorkspaceMembers,
-  type WorkspaceMembersResponse,
-} from "@/lib/api/users";
+import { getDetectionRules, type DetectionRule } from "@/lib/api/rules";
+import { getWorkspaceMembers } from "@/lib/api/users";
 import { OverviewStats } from "./overview-stats";
 import { ManagementSections } from "./management-sections";
 
+type OverviewData = {
+  totalAnalysts: number;
+  activeAnalysts: number;
+  rules: DetectionRule[];
+};
+
 export function AdminOverview() {
-  const [membersResponse, setMembersResponse] =
-    useState<WorkspaceMembersResponse | null>(null);
+  const [overview, setOverview] = useState<OverviewData | null>(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getWorkspaceMembers()
-      .then(setMembersResponse)
+    // Only the totals are needed, so each count asks for a single row
+    Promise.all([
+      getWorkspaceMembers(1, 1),
+      getWorkspaceMembers(1, 1, "ACTIVE"),
+      getDetectionRules(),
+    ])
+      .then(([all, active, rules]) =>
+        setOverview({
+          totalAnalysts: all.total,
+          activeAnalysts: active.total,
+          rules,
+        }),
+      )
       .catch((err: unknown) => {
         setError(
           err instanceof Error ? err.message : "Unable to load overview.",
@@ -71,8 +85,8 @@ export function AdminOverview() {
         <p role="alert" className="text-sm text-red-400">
           {error}
         </p>
-      ) : membersResponse ? (
-        <OverviewStats membersResponse={membersResponse} />
+      ) : overview ? (
+        <OverviewStats {...overview} />
       ) : null}
 
       <ManagementSections />
