@@ -10,20 +10,20 @@ const navigation = [
     href: "/workspace/overview",
   },
   {
-    label: "Transaction data",
+    label: "Transaction Data",
     href: "/workspace/transaction-data",
   },
   {
-    label: "All transactions",
+    label: "All Transactions",
     href: "/workspace/transactions",
   },
   {
-    label: "Flagged transactions",
+    label: "Flagged Transactions",
     href: "/workspace/flagged-transactions",
   },
 
   {
-    label: "Rejected transactions",
+    label: "Rejected Transactions",
     href: "/workspace/rejected-transactions",
   },
   // {
@@ -32,20 +32,24 @@ const navigation = [
   // },
   // x
   {
-    label: "Detection configuration",
+    label: "Detection Configuration",
     href: "/workspace/detection-rules",
   },
-  // {
-  //   label: "Detection configuration",
-  //   href: "/workspace/detection-configuration",
-  // },
   {
-    label: "Platform activity",
+    label: "Upload History",
+    href: "/workspace/uploads",
+  },
+  {
+    label: "Platform Activity",
     href: "/workspace/platform-activity",
   },
   {
-    label: "Account & guidance",
+    label: "Account & Guidance",
     href: "/workspace/account",
+  },
+  {
+    label: "Sign Out",
+    href: "/workspace/signout",
   },
 ];
 
@@ -84,7 +88,7 @@ export function Sidebar() {
         {/* Mobile close button */}
         <div className="mb-3 flex items-center justify-between lg:hidden">
           <p className="font-manrope text-[16px] font-semibold text-[#EDEFFF]">
-            Provera AI
+            {/* Provera AI */}
           </p>
 
           <button

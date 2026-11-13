@@ -18,23 +18,46 @@ export default function AttentionTable({
     )
     .slice(0, 4);
 
+  // const transactionPath =
+  //   portal === "admin"
+  //     ? "/admin/workspace/transaction-data"
+  //     : "/workspace/transaction-data";
+
   const transactionPath =
     portal === "admin"
-      ? "/admin/workspace/transaction-data"
-      : "/workspace/transaction-data";
+      ? "/admin/workspace/transactions"
+      : "/workspace/transactions";
 
   const flaggedPath =
     portal === "admin"
       ? "/admin/workspace/flagged-transactions"
       : "/workspace/flagged-transactions";
 
+  // function formatDate(dateString: string) {
+  //   return (
+  //     new Date(dateString).toISOString().replace("T", ", ").slice(0, 17) +
+  //     " UTC"
+  //   );
+  // }
   function formatDate(dateString: string) {
+    const date = new Date(dateString);
+
+    if (Number.isNaN(date.getTime())) {
+      return "Date unavailable";
+    }
+
     return (
-      new Date(dateString).toISOString().replace("T", ", ").slice(0, 17) +
-      " UTC"
+      new Intl.DateTimeFormat("en-GB", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        hourCycle: "h23",
+        timeZone: "Africa/Lagos",
+      }).format(date) + " WAT"
     );
   }
-
   return (
     <div className="mt-6">
       <h2 className="font-manrope text-[28px] font-semibold leading-[36px] text-[#EDEFFF]">

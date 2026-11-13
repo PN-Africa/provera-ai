@@ -139,43 +139,6 @@ export async function getUploads(
   return readResponse<UploadListResponse>(response);
 }
 
-// Get all uploads
-// export async function getUploads(
-//   page = 1,
-//   limit = 20,
-// ): Promise<UploadListResponse> {
-//   const response = await fetch(
-//     `${getApiUrl()}/uploads?page=${page}&limit=${limit}`,
-//     {
-//       method: "GET",
-//       credentials: "include",
-//       cache: "no-store",
-//     },
-//   );
-
-//   return readResponse<UploadListResponse>(response);
-// }
-
-// export async function getUploads(
-//   page = 1,
-//   limit = 20,
-// ): Promise<UploadListResponse> {
-//   const response = await fetch(
-//     `${getApiUrl()}/uploads?page=${page}&limit=${limit}`,
-//     {
-//       method: "GET",
-//       credentials: "include",
-//       cache: "no-store",
-//     },
-//   );
-
-//   const data = await readResponse<unknown>(response);
-
-//   console.log("GET UPLOADS API RESPONSE:", data);
-
-//   return data as UploadListResponse;
-// }
-
 // Get a specific upload
 export async function getUpload(id: string): Promise<TransactionUpload> {
   const response = await fetch(
@@ -296,24 +259,55 @@ export async function getTransactions(
   return readResponse<TransactionListResponse>(response);
 }
 
+// export type DashboardSummary = {
+//   transactions: {
+//     total: number;
+//     scored: number;
+//     flagged: number;
+//     flaggedPercent: number;
+//   };
+//   riskLevels: Record<string, number>;
+//   reviewProgress: {
+//     open: number;
+//     inReview: number;
+//     closed: number;
+//     cleared: number;
+//     escalated: number;
+//   };
+//   topRules: Array<{
+//     rule: string;
+//     count: number;
+//   }>;
+// };
+
 export type DashboardSummary = {
+  from: string;
+  to: string;
+
   transactions: {
     total: number;
     scored: number;
     flagged: number;
     flaggedPercent: number;
   };
-  riskLevels: Record<string, number>;
-  reviewProgress: {
+
+  riskLevels: {
+    LOW: number;
+    MEDIUM: number;
+    HIGH: number;
+  };
+
+  reviews: {
     open: number;
-    inReview: number;
     closed: number;
     cleared: number;
     escalated: number;
   };
-  topRules: Array<{
-    rule: string;
+
+  topIndicators: Array<{
+    ruleName: string;
     count: number;
+    percentOfScored: number;
   }>;
 };
 

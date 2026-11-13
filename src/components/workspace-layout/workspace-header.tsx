@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const pageNames: Record<string, string> = {
@@ -23,7 +24,7 @@ export function WorkspaceHeader() {
     <header className="fixed left-0 right-0 top-0 z-40 h-[76px] border-b border-[#1F2028] bg-[#111217]">
       <div className="flex h-full items-center px-8">
         {/* Logo */}
-        <div className="flex items-center">
+        {/* <div className="flex items-center">
           <Image
             src="/provera-logo.png"
             alt="Provera AI"
@@ -32,8 +33,19 @@ export function WorkspaceHeader() {
             priority
             className="h-auto w-[135px]"
           />
+        </div> */}
+        <div className="flex items-center">
+          <Link href="/" aria-label="Provera AI home" className="">
+            <Image
+              src="/provera-logo.png"
+              alt="Provera AI"
+              width={182}
+              height={29}
+              priority
+              className="block h-[29px] w-[182px]"
+            />
+          </Link>
         </div>
-
         {/* Page context */}
         <div className="ml-[55px] font-sans text-[12px] font-normal uppercase leading-[18px] text-[#B7B9CB]">
           WORKSPACE / {pageName}

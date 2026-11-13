@@ -67,7 +67,7 @@ const adminNavigation = [
     href: "/admin/platform-settings",
   },
   {
-    label: "Logout",
+    label: "Signout",
     href: "/admin/logout",
   },
 ];
