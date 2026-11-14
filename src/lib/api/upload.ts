@@ -1,12 +1,4 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
-
-function getApiUrl() {
-  if (!API_URL) {
-    throw new Error("The backend API URL is not configured.");
-  }
-
-  return API_URL;
-}
+import { authenticatedFetch } from "./client";
 
 async function readResponse<T>(response: Response): Promise<T> {
   const data = await response.json().catch(() => null);
@@ -116,7 +108,7 @@ export async function uploadTransactions(file: File): Promise<UploadResponse> {
   const formData = new FormData();
   formData.append("file", file);
 
-  const response = await fetch(`${getApiUrl()}/uploads`, {
+  const response = await authenticatedFetch(`/uploads`, {
     method: "POST",
     credentials: "include",
     body: formData,
@@ -129,8 +121,8 @@ export async function getUploads(
   page = 1,
   limit = 20,
 ): Promise<UploadListResponse> {
-  const response = await fetch(
-    `${getApiUrl()}/uploads?page=${page}&limit=${limit}`,
+  const response = await authenticatedFetch(
+    `/uploads?page=${page}&limit=${limit}`,
     {
       method: "GET",
       credentials: "include",
@@ -143,8 +135,8 @@ export async function getUploads(
 
 // Get a specific upload
 export async function getUpload(id: string): Promise<TransactionUpload> {
-  const response = await fetch(
-    `${getApiUrl()}/uploads/${encodeURIComponent(id)}`,
+  const response = await authenticatedFetch(
+    `/uploads/${encodeURIComponent(id)}`,
     {
       method: "GET",
       credentials: "include",
@@ -161,8 +153,8 @@ export async function getRejectedRows(
   page = 1,
   limit = 20,
 ): Promise<RejectedRowsResponse> {
-  const response = await fetch(
-    `${getApiUrl()}/uploads/${encodeURIComponent(id)}/rejected?page=${page}&limit=${limit}`,
+  const response = await authenticatedFetch(
+    `/uploads/${encodeURIComponent(id)}/rejected?page=${page}&limit=${limit}`,
     {
       method: "GET",
       credentials: "include",
@@ -175,7 +167,7 @@ export async function getRejectedRows(
 
 // Score all unscored transactions
 export async function scoreUnscoredUploads(): Promise<ScoreUploadsResponse> {
-  const response = await fetch(`${getApiUrl()}/uploads/score-unscored`, {
+  const response = await authenticatedFetch(`/uploads/score-unscored`, {
     method: "POST",
     credentials: "include",
   });
@@ -185,8 +177,8 @@ export async function scoreUnscoredUploads(): Promise<ScoreUploadsResponse> {
 
 // Rescore a specific upload
 export async function rescoreUpload(id: string): Promise<RescoreResponse> {
-  const response = await fetch(
-    `${getApiUrl()}/uploads/${encodeURIComponent(id)}/rescore`,
+  const response = await authenticatedFetch(
+    `/uploads/${encodeURIComponent(id)}/rescore`,
     {
       method: "POST",
       credentials: "include",
@@ -248,8 +240,8 @@ export async function getTransactions(
     }
   });
 
-  const response = await fetch(
-    `${getApiUrl()}/transactions?${params.toString()}`,
+  const response = await authenticatedFetch(
+    `/transactions?${params.toString()}`,
     {
       method: "GET",
       credentials: "include",
@@ -336,8 +328,8 @@ export async function getDashboardSummary(
   if (filters.to) params.set("to", filters.to);
 
   const query = params.toString();
-  const response = await fetch(
-    `${getApiUrl()}/dashboard/summary${query ? `?${query}` : ""}`,
+  const response = await authenticatedFetch(
+    `/dashboard/summary${query ? `?${query}` : ""}`,
     {
       method: "GET",
       credentials: "include",
@@ -357,8 +349,8 @@ export async function getDashboardTrends(
   if (filters.to) params.set("to", filters.to);
   params.set("interval", filters.interval ?? "day");
 
-  const response = await fetch(
-    `${getApiUrl()}/dashboard/trends?${params.toString()}`,
+  const response = await authenticatedFetch(
+    `/dashboard/trends?${params.toString()}`,
     {
       method: "GET",
       credentials: "include",

@@ -183,6 +183,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { getCurrentUser } from "@/lib/api/auth";
 import { getAllAuditLogs, type AuditLog } from "@/lib/api/audit-logs";
+import { getAllWorkspaceMembers } from "@/lib/api/users";
 import { ActivityFilters } from "./activity-filters";
 import { ActivityTable, type ActivityEvent } from "./activity-table";
 
@@ -242,6 +243,12 @@ function getCategory(action: string) {
 //   };
 // }
 
+// actorId is null for events with no signed-in user, e.g. a failed sign-in
+function actorNameOf(log: AuditLog, names: Record<string, string>) {
+  if (!log.actorId) return "System";
+  return names[log.actorId] ?? (log.actorRole === "ADMIN" ? "Administrator" : "Analyst");
+}
+
 function toActivityEvent(log: AuditLog, actorName: string): ActivityEvent {
   return {
     id: log.id,
@@ -261,7 +268,9 @@ export function PlatformActivity() {
   const [error, setError] = useState("");
   const [now] = useState(() => Date.now());
   // const { user } = useAuth();
-  const [actorName, setActorName] = useState("You");
+  // Display names by account id: you, plus every analyst when you are an admin
+  const [actorNames, setActorNames] = useState<Record<string, string>>({});
+  const [isAdmin, setIsAdmin] = useState(false);
   useEffect(() => {
     let cancelled = false;
 
@@ -274,10 +283,17 @@ export function PlatformActivity() {
           getAllAuditLogs(),
           getCurrentUser(),
         ]);
+        const admin = currentUser.role.toUpperCase() === "ADMIN";
+        // Admins see every analyst's activity; analysts only their own
+        const members = admin ? await getAllWorkspaceMembers() : [];
 
         if (cancelled) return;
 
-        setActorName(currentUser.fullName || "You");
+        setIsAdmin(admin);
+        setActorNames({
+          ...Object.fromEntries(members.map((m) => [m.id, m.fullName])),
+          [currentUser.id]: `${currentUser.fullName || "You"} (you)`,
+        });
 
         setLogs(
           [...auditLogs].sort(
@@ -314,6 +330,7 @@ export function PlatformActivity() {
       logs
         .filter((log) => {
           const matchesSearch =
+            actorNameOf(log, actorNames).toLowerCase().includes(query) ||
             (log.actorRole ?? "").toLowerCase().includes(query) ||
             (log.action ?? "").toLowerCase().includes(query) ||
             (log.entityType ?? "").toLowerCase().includes(query) ||
@@ -331,10 +348,9 @@ export function PlatformActivity() {
           return matchesSearch && matchesType && matchesPeriod;
         })
         // .map(toActivityEvent);
-        .map((log) => toActivityEvent(log, actorName))
+        .map((log) => toActivityEvent(log, actorNameOf(log, actorNames)))
     );
-    // }, [logs, search, eventType, period, now]);
-  }, [logs, search, eventType, period, now, actorName]);
+  }, [logs, search, eventType, period, now, actorNames]);
 
   return (
     <div className="mx-auto w-full max-w-[1440px] space-y-6">
@@ -343,8 +359,9 @@ export function PlatformActivity() {
           Platform activity
         </h1>
         <p className="mt-2 text-sm leading-6 text-[#A8ADB8]">
-          See your activity, including access changes, settings updates, and
-          transaction analysis.
+          {isAdmin
+            ? "Activity across the platform: every analyst's sign-ins, uploads, reviews and exports, and admin changes to access and rules."
+            : "Your activity, including sign-ins, uploads, reviews and exports."}
         </p>
       </header>
 

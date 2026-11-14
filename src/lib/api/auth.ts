@@ -1,3 +1,5 @@
+import { authenticatedFetch } from "./client";
+
 const getApiUrl = () => {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -113,21 +115,10 @@ export async function login(payload: {
   return readResponse<AuthUser>(response);
 }
 
+// Renews an expired session before giving up, so page guards do not sign the
+// user out every 15 minutes
 export async function getCurrentUser(): Promise<AuthUser> {
-  const response = await fetch(`${getApiUrl()}/auth/me`, {
-    method: "GET",
-    credentials: "include",
-    cache: "no-store",
-  });
-
-  return readResponse<AuthUser>(response);
-}
-
-export async function refreshSession(): Promise<AuthUser> {
-  const response = await fetch(`${getApiUrl()}/auth/refresh`, {
-    method: "POST",
-    credentials: "include",
-  });
+  const response = await authenticatedFetch("/auth/me", { method: "GET" });
 
   return readResponse<AuthUser>(response);
 }

@@ -7,6 +7,7 @@ type Props = {
   user: WorkspaceUser;
   onSave: (user: WorkspaceUser) => void;
   onDeactivate: (user: WorkspaceUser) => void;
+  onReactivate: (user: WorkspaceUser) => void;
   onCancel: () => void;
   saving?: boolean;
 };
@@ -15,6 +16,7 @@ export function ManageUserForm({
   user,
   onSave,
   onDeactivate,
+  onReactivate,
   onCancel,
   saving = false,
 }: Props) {
@@ -90,14 +92,25 @@ export function ManageUserForm({
           >
             {saving ? "Saving..." : "Save user access"}
           </button>
-          <button
-            type="button"
-            disabled={user.owner || status === "Inactive" || saving}
-            onClick={() => onDeactivate(user)}
-            className="min-h-12 rounded-lg border border-[#393943] px-5 text-sm text-white hover:bg-[#292930] disabled:opacity-40"
-          >
-            Deactivate user
-          </button>
+          {user.status === "Inactive" ? (
+            <button
+              type="button"
+              disabled={user.owner || saving}
+              onClick={() => onReactivate(user)}
+              className="min-h-12 rounded-lg border border-[#34E89A]/40 px-5 text-sm text-[#34E89A] hover:bg-[#203B30] disabled:opacity-40"
+            >
+              Reactivate user
+            </button>
+          ) : (
+            <button
+              type="button"
+              disabled={user.owner || status === "Inactive" || saving}
+              onClick={() => onDeactivate(user)}
+              className="min-h-12 rounded-lg border border-[#393943] px-5 text-sm text-white hover:bg-[#292930] disabled:opacity-40"
+            >
+              Deactivate user
+            </button>
+          )}
           <button
             type="button"
             onClick={onCancel}

@@ -52,6 +52,23 @@ export function ManageUserPage({ user }: Props) {
     }
   }
 
+  async function handleReactivate(selectedUser: WorkspaceUser) {
+    setSaving(true);
+    setError("");
+
+    try {
+      await updateMemberStatus(selectedUser.id, "ACTIVE");
+      router.push("/admin/users-and-access");
+      router.refresh();
+    } catch (err) {
+      setError(
+        err instanceof Error ? err.message : "Unable to reactivate member.",
+      );
+    } finally {
+      setSaving(false);
+    }
+  }
+
   return (
     <div>
       {error && (
@@ -64,6 +81,7 @@ export function ManageUserPage({ user }: Props) {
         user={user}
         onSave={handleSave}
         onDeactivate={handleDeactivate}
+        onReactivate={handleReactivate}
         onCancel={() => router.push("/admin/users-and-access")}
         saving={saving}
       />
